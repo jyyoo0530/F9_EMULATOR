@@ -1,0 +1,28 @@
+{
+  "type": "CITY",
+  "maerskGeoLocationId": "1W6A78MLLC58F",
+  "unLocCode": "MYBKI",
+  "countryName": "Malaysia",
+  "countryCode": "MY",
+  "cityName": "Kota Kinabalu",
+  "regionCode": "12",
+  "regionName": "Sabah",
+  "maerskRkstCode": "MYBKI",
+  "maerskRktsCode": "BKI",
+  "timezoneId": "Asia/Kuala_Lumpur",
+  "brands": [
+    "MAEU",
+    "MCPU",
+    "SAFM",
+    "SEAU",
+    "SEJJ"
+  ],
+  "brandNames": [
+    "MCC Transport",
+    "Maersk Line",
+    "Safmarine",
+    "SeaGo Line",
+    "SeaLand"
+  ],
+  "countryGeoId": "2FVHH10N62PA6"
+}
