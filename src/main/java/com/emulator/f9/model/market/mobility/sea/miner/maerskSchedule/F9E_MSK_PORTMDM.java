@@ -1,10 +1,12 @@
 package com.emulator.f9.model.market.mobility.sea.miner.maerskSchedule;
 
+import com.emulator.f9.model.market.mobility.sea.mdm.F9_MDM_LOCATION_ReactiveMongoRepository;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 
@@ -60,7 +62,12 @@ public class F9E_MSK_PORTMDM {
 
     // --) 병렬 처리로 변경 필요.
     public void setAllData(String stringResponse) {
-        JsonObject inputData = new JsonParser().parse(stringResponse).getAsJsonArray().get(0).getAsJsonObject();
+        JsonObject inputData = new JsonObject();
+        try {
+            inputData = new JsonParser().parse(stringResponse).getAsJsonObject();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
         ArrayList<String> brndNms = new ArrayList<>();
         ArrayList<String> brnds = new ArrayList<>();
 
@@ -128,7 +135,6 @@ public class F9E_MSK_PORTMDM {
             brnds.add("UNDEFINED");
             setBrands(brnds);
         }
-
-
     }
+
 }

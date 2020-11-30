@@ -1,11 +1,15 @@
 package com.emulator.f9.service;
 
+import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD;
+import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD_ReactiveMongoRepository;
 import com.emulator.f9.model.market.mobility.sea.mdm.F9_MDM_LOCATION;
 import com.emulator.f9.model.market.mobility.sea.mdm.F9_MDM_LOCATION_ReactiveMongoRepository;
 import com.emulator.f9.model.market.mobility.sea.mdm.F9_MDM_VSL;
 import com.emulator.f9.model.market.mobility.sea.mdm.F9_MDM_VSL_ReactiveMongoRepository;
 import com.emulator.f9.model.market.mobility.sea.miner.Converter_maerskSchedule;
 import com.emulator.f9.model.market.mobility.sea.miner.maerskSchedule.*;
+import com.emulator.f9.model.tmp.SCH_SRC;
+import com.emulator.f9.model.tmp.SCH_SRC_MySqlRepository;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import org.springframework.stereotype.Service;
@@ -139,25 +143,67 @@ public class MaerskMiningService {
         List<F9E_MSK_PORTMDM> f9eMskPortmdms = new ArrayList<>();
         String url = maerskPortDetailUri + locationName.replace(" ", "+");
         try {
-            String response = restTemplate.getForObject(url, String.class).replace("\"\"", "\"");
-            f9eMskPortmdm.setAllData(response);
-        } catch (Exception e) {
-            try {
-                String response = restTemplate.getForObject(url, String.class).replace("\"\"", "\"");
-                JsonArray response2 = new JsonParser().parse(response).getAsJsonArray();
-                response2.forEach(z -> {
-                    F9E_MSK_PORTMDM test = new F9E_MSK_PORTMDM();
-                    test.setAllData(z.toString());
-                    if (test.getMaerskGeoLocationId() == locationCode) {
-                        f9eMskPortmdm.setAllData(z.toString());
-                    }
-                });
-                System.out.println("Warning!!     :..................response is not object but list(object)");
-                System.out.println("Warning!!     :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
 
-            } catch (Exception f) {
-                System.out.println("Exception!!   :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
+            String response = restTemplate.getForObject(url, String.class).replace("\"\"", "\"");
+            int length = new JsonParser().parse(response).getAsJsonArray().size();
+
+            switch (length) {
+                case 0:
+                    System.out.println("Exception!!   :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
+                case 1:
+                    String response2 = "";
+                    try {
+                        JsonArray test = new JsonParser().parse(response.replace("\"\"", "")).getAsJsonArray();
+                        response2 = test.get(0).toString().replace("\"\"", "");
+                    } catch (Exception e) {
+                        response2 = response;
+                        System.out.println("Warning!!     :....................response length is 1 and not an array");
+                        System.out.println("Warning!!     :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
+                    }
+                    f9eMskPortmdm.setAllData(response2);
+                    System.out.println("Warning!!     :..................response is not object but list(object)");
+                    System.out.println("Warning!!     :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                    JsonArray response3 = new JsonParser().parse(response).getAsJsonArray();
+                    response3.forEach(z -> {
+                        F9E_MSK_PORTMDM test = new F9E_MSK_PORTMDM();
+                        test.setAllData(z.toString().replace("\"\"", ""));
+                        String testi = test.getMaerskGeoLocationId();
+                        if (testi.equals(locationCode)) {
+                            System.out.println("THis is it!!");
+                            f9eMskPortmdm.setAllData(z.toString());
+                        } else {
+                            System.out.println("Something's Wrong");
+                        }
+                    });
+                    System.out.println("Warning!!     :..................response is not object but list(object)");
+                    System.out.println("Warning!!     :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
             }
+        } catch (Exception e) {
+            System.out.println("Exception!!   :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
         }
         return f9eMskPortmdm;
     }
@@ -174,29 +220,45 @@ public class MaerskMiningService {
         }
     }
 
-    public F9_MDM_LOCATION updateF9MdmLocation(F9E_MSK_PORTMDM f9eMskPortmdm, F9_MDM_LOCATION_ReactiveMongoRepository f9MdmLocationRepo) {
-        F9_MDM_LOCATION f9MdmLocation = new F9_MDM_LOCATION();
+    public void updateF9MdmLocation(F9E_MSK_PORTMDM f9eMskPortmdm, F9_MDM_LOCATION_ReactiveMongoRepository f9MdmLocationRepo) {
         try {
-            f9MdmLocation = mskConverter.convertPortMdm(f9eMskPortmdm, f9MdmLocationRepo);
+            F9_MDM_LOCATION f9MdmLocation = mskConverter.convertPortMdm(f9eMskPortmdm, f9MdmLocationRepo);
             f9MdmLocationRepo.save(f9MdmLocation).block();
         } catch (Exception e) {
             System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.updateF9MdmLocation()");
         }
-        return f9MdmLocation;
     }
 
-    public ArrayList<F9E_MSK_SKED_VSL> distinctAndSortF9eMskSkedVsls(ArrayList<F9E_MSK_SKED_VSL> f9eMskSkedVsls) {
-        ArrayList<F9E_MSK_SKED_VSL> result = new ArrayList<>();
-
+    public List<F9_SEA_SKD> parseIntoF9SeaSkd(
+            List<F9E_MSK_SKED_VSL> f9eMskSkedVsls,
+            F9_MDM_LOCATION_ReactiveMongoRepository f9MdmLocationRepo,
+            F9_MDM_VSL_ReactiveMongoRepository f9MdmVslRepo,
+            String vesselCode) {
+        List<F9_SEA_SKD> result = new ArrayList<>();
         try {
-
+            result = mskConverter.convertMskSked(f9eMskSkedVsls, f9MdmLocationRepo, f9MdmVslRepo, vesselCode);
         } catch (Exception e) {
-
+            System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.parseIntoF9SeaSkd()");
         }
-
-
         return result;
     }
+
+    public void uploadF9SeaSkd(F9_SEA_SKD f9SeaSkd, F9_SEA_SKD_ReactiveMongoRepository f9SeaSkdRepo) {
+        try { // 찾아서 같으면 pass, 다르면 seq 더해서 업로드 한다.
+            f9SeaSkdRepo.save(f9SeaSkd).block();
+        } catch (Exception e) {
+            System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.uploadF9SeaSkd()");
+        }
+    }
+
+    public void uploadF9SeaSkdMySQL(SCH_SRC schSrc, SCH_SRC_MySqlRepository schSrcMySqlRepo) {
+        try { // 찾아서 같으면 pass, 다르면 seq 더해서 업로드 한다.
+            schSrcMySqlRepo.save(schSrc);
+        } catch (Exception e) {
+            System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.uploadF9SeaSkdMySQL()");
+        }
+    }
+
 }
 
 

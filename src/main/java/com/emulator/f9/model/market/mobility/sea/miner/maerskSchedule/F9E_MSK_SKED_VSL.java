@@ -67,7 +67,7 @@ public class F9E_MSK_SKED_VSL {
         setTerminalGeoId(inputData.get("terminalGeoId").toString().replace("\"", ""));
         setVoyageArrival(inputData.get("voyageArrival").toString().replace("\"", ""));
         setVoyageDeparture(inputData.get("voyageDeparture").toString().replace("\"", ""));
-        setScheduleKey(getSrcVslCode() + getSrcPortCode() + getArrival().replace("\"", ""));
+        setScheduleKey(getSrcVslCode() + getSrcPortCode() + getArrival().replaceAll("[^\\d.]", ""));
     }
 
 }

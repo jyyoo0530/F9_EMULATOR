@@ -13,103 +13,119 @@ public class F9_SEA_SKD {
     @Id
     @Getter
     @Setter
-    String dataCreationDate;
+    String scheduleId;                   // --) ID
 
     @Getter
     @Setter
-    String serviceId;
+    int scheduleSeq;                     // --) 시퀀스
 
     @Getter
     @Setter
-    int serviceSeq;
+    String dataCreationDate;             // --) 데이터 생성 일자
 
     @Getter
     @Setter
-    String serviceLaneCode;
+    String serviceLaneKey;               // --) 서비스 Grouping Code
 
     @Getter
     @Setter
-    String serviceLaneName;
+    String serviceLaneName;               // --) 서비스 Grouping Name
 
     @Getter
     @Setter
-    String serviceProductWeek; // POL ETD 기준
+    String scheduleOwnerCode;            // --) 실제로 선박 스케쥴을 운용하는 오너
 
     @Getter
     @Setter
-    String dataOwner;
+    String scheduleProvider;             // --) 선박 스케쥴을 제공한 source Provider
 
     @Getter
     @Setter
-    String referenceDataOwnerCode;
-
-    /// lineItem Column
-    @Getter
-    @Setter
-    String vesselId;
+    String voyageNumber;                 // --) 선박의 항차
 
     @Getter
     @Setter
-    String vesselVoyage;
+    String vesselKey;                    //  1) 무엇이
 
     @Getter
     @Setter
-    String serviceDirection;
+    String vesselName;                    //--1) 선박명
 
     @Getter
     @Setter
-    int polSeq;
+    String fromKey;                      //  2) 어디서 ( From, locationCode )
 
     @Getter
     @Setter
-    String polLocationCode;
+    int fromSeq;                          //   ) 어디서에 대한 route sequence
 
     @Getter
     @Setter
-    String polETA;
+    String fromLocationStatus;           //   ) inland 인지 아닌지
 
     @Getter
     @Setter
-    String polETB;
+    String fromScheduleReferenceKey;     //  3) 언제 ( From )
 
     @Getter
     @Setter
-    String polETD;
+    String serviceProductWeek;           //   ) 상품구분코드 (POL ETD 기준)
 
     @Getter
     @Setter
-    String polLocalTimelineId; // POL에서 발생 기타 TIMELINE에 대한 별도 테이블의 키 코드.할 (Documentation관련등등...)
+    String fromETA;                      //   )
 
     @Getter
     @Setter
-    String preNodeScheduleId; /// POL 이전의 노드에 대한 Connection
+    String fromETB;                      //   )
 
     @Getter
     @Setter
-    int podSeq;
+    String fromETD;                      //   )
 
     @Getter
     @Setter
-    String podLocationCode;
+    String fromAdditionalInfoKey;        // --) from 노드에서의 추가 정보 ( 도큐멘트 등등의 기타 스케쥴 )
 
     @Getter
     @Setter
-    String podETA;
+    String fromAlliedNodeScheduleId;     // --) 인접한 Node의 스케쥴 Id
 
     @Getter
     @Setter
-    String podETB;
+    String toKey;                        //  4) 어디로 ( To, locationCode )
 
     @Getter
     @Setter
-    String podETD;
+    int toSeq;                           //   ) 어디서에 대한 route sequence
 
     @Getter
     @Setter
-    String podLocalTimelineId; // POD에서 발생 기타 TIMELINE에 대한 별도 테이블의 키 코드.할 (Documentation관련등등...)
+    String toLocationStatus;           //   ) inland 인지 아닌지
 
     @Getter
     @Setter
-    String postNodeScheduleId; /// POD 이의 노드에 대한 Connection
+    String toScheduleReferenceKey;       // 5) 어디로 ( To )
+
+    @Getter
+    @Setter
+    String toETA;                        //  )
+
+    @Getter
+    @Setter
+    String toETB;                        //  )
+
+    @Getter
+    @Setter
+    String toETD;                        //  )
+
+    @Getter
+    @Setter
+    String toAdditionalInfoKey;          // --) to 노드에서의 추가 정보 ( 도큐멘트 등등의 기타 스케쥴 )
+
+    @Getter
+    @Setter
+    String toAlliedNodeScheduleId;       // --) 인접한 Node의 스케쥴 Id
 
 }
+

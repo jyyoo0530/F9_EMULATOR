@@ -1,8 +1,14 @@
 package com.emulator.f9.rest;
 
 import com.emulator.f9.model.Membership;
+import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD;
+import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD_ReactiveMongoRepository;
 import com.emulator.f9.model.market.mobility.sea.mdm.*;
 import com.emulator.f9.model.market.mobility.sea.miner.maerskSchedule.*;
+import com.emulator.f9.model.tmp.MDM_T_PORT_MySqlRepository;
+import com.emulator.f9.model.tmp.MDM_T_VSL_MySqlRepository;
+import com.emulator.f9.model.tmp.SCH_SRC;
+import com.emulator.f9.model.tmp.SCH_SRC_MySqlRepository;
 import com.emulator.f9.service.MaerskMiningService;
 import com.emulator.f9.service.UnlocodeMDM;
 import com.google.gson.JsonObject;
@@ -26,7 +32,6 @@ import java.util.stream.Stream;
 @RestController()
 public class F9E_RestClient {
 
-
     @Autowired
     MongoTemplate mongoTemplate;
 
@@ -41,6 +46,18 @@ public class F9E_RestClient {
 
     @Autowired
     F9_MDM_DATAOWNER_ReactiveMongoRepository f9MdmDataownerRepo;
+
+    @Autowired
+    F9_SEA_SKD_ReactiveMongoRepository f9SeaSkdRepo;
+
+    @Autowired
+    SCH_SRC_MySqlRepository schSrcMySqlRepo;
+
+    @Autowired
+    MDM_T_PORT_MySqlRepository mdmTPortMySqlRepo;
+
+    @Autowired
+    MDM_T_VSL_MySqlRepository mdmTVslMySqlRepo;
 
     Membership membership = new Membership();
 
@@ -97,7 +114,6 @@ public class F9E_RestClient {
                 });
                 List<String> distinctPortList = portList.stream().distinct().collect(Collectors.toList());
 
-
                 // 4-2) update port lists
                 distinctPortList.forEach(a -> {
                     // 4-2-1) check if port code is exists in the collection
@@ -111,21 +127,26 @@ public class F9E_RestClient {
                 });
             }
 
-
             // 5) convert to f9s vessel schedule
+            List<F9_SEA_SKD> f9SeaSkds = miningMaersk.parseIntoF9SeaSkd(listF9eSeaSkd, f9MdmLocationRepo, f9MdmVslRepo, x);
 
-
-            // 6) update F9E_SEA_SKED
+            // 6) update F9E_SEA_SKED(MongoDB and MySQL)
+            f9SeaSkds.forEach(t -> {
+                SCH_SRC u = new SCH_SRC();
+                u.setAllData(t);
+                miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
+                miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo);
+            });
 
 
         });
 
     }
 
-    @RequestMapping(value = "generateInitialMDM", method = RequestMethod.GET)
-    public void generateMDM() throws IOException {
+    @RequestMapping(value = "generateInitialMDM/{targetSource}", method = RequestMethod.GET)
+    public void generateMDM(@PathVariable("targetSource") String targetSource) throws IOException {
         UnlocodeMDM mdm = new UnlocodeMDM();
-        mdm.generateInitialMDM(f9MdmLocationRepo);
+        mdm.generateInitialMDM(targetSource, f9MdmLocationRepo, mdmTPortMySqlRepo);
     }
 
     @RequestMapping(path = "login", method = RequestMethod.GET)
@@ -165,7 +186,6 @@ public class F9E_RestClient {
 
     }
 
-
 //    @RequestMapping(path = "test/create/mastercontract", method = RequestMethod.GET)
 //    public void postMasterContract() {
 //
@@ -180,7 +200,6 @@ public class F9E_RestClient {
 //        restTemplate.postForObject(targetUrl, request, String.class);
 //
 //    }
-
 
 //    @RequestMapping(value = "test/create/sellerbot", method = RequestMethod.GET)
 //    public void postSellOffer() throws InterruptedException {
