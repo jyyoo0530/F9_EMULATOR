@@ -5,10 +5,7 @@ import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD;
 import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD_ReactiveMongoRepository;
 import com.emulator.f9.model.market.mobility.sea.mdm.*;
 import com.emulator.f9.model.market.mobility.sea.miner.maerskSchedule.*;
-import com.emulator.f9.model.tmp.MDM_T_PORT_MySqlRepository;
-import com.emulator.f9.model.tmp.MDM_T_VSL_MySqlRepository;
-import com.emulator.f9.model.tmp.SCH_SRC;
-import com.emulator.f9.model.tmp.SCH_SRC_MySqlRepository;
+import com.emulator.f9.model.tmp.*;
 import com.emulator.f9.service.MaerskMiningService;
 import com.emulator.f9.service.UnlocodeMDM;
 import com.google.gson.JsonObject;
@@ -61,9 +58,11 @@ public class F9E_RestClient {
 
     Membership membership = new Membership();
 
-    @RequestMapping(value = "mobility/sea/schedule/{codeOwner}", method = RequestMethod.GET)
-    public void digMaerskSchedule(@PathVariable("codeOwner") String codeOwner) {
+    @RequestMapping(value = "mobility/sea/schedule/msk", method = RequestMethod.GET)
+    public void digMaerskSchedule() {
         MaerskMiningService miningMaersk = new MaerskMiningService();
+        MdmVesselCloneService mdmVesselCloneService = new MdmVesselCloneService();
+
         // --) get active port list
         ArrayList<F9E_MSK_ACTIVEPORT> activePorts = miningMaersk.getActivePorts();
         ArrayList<F9E_MSK_ACTIVEVESSEL> activeVessels = miningMaersk.getActiveVessels();
@@ -84,6 +83,7 @@ public class F9E_RestClient {
             // --) update Vessel MDM
             if (!chkVsl) {
                 miningMaersk.updateVesselMdm(mskVslMdm, f9MdmVslRepo);
+                mdmVesselCloneService.cloneMdmVessel(mskVslMdm, mdmTVslMySqlRepo); /// Temporary
             }
 
             // --) get into loop (parallel computing으로 가야함..)
@@ -123,6 +123,7 @@ public class F9E_RestClient {
                     if (!chkResult) {
                         F9E_MSK_PORTMDM response = miningMaersk.getPortMdm(locationName, a);
                         miningMaersk.updateF9MdmLocation(response, f9MdmLocationRepo);
+                        mdmVesselCloneService.cloneMdmPort(response, f9MdmLocationRepo, mdmTPortMySqlRepo); // TEMPORARY
                     }
                 });
             }
@@ -135,12 +136,10 @@ public class F9E_RestClient {
                 SCH_SRC u = new SCH_SRC();
                 u.setAllData(t);
                 miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
-                miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo);
+                miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPORARY
             });
-
-
+            System.out.println("///////////////// " + vesselList.indexOf(x) + " out of " + vesselList.size() + " completed..!!" + " /////////////////");
         });
-
     }
 
     @RequestMapping(value = "generateInitialMDM/{targetSource}", method = RequestMethod.GET)

@@ -1,5 +1,6 @@
 package com.emulator.f9.model.tmp;
 
+import com.emulator.f9.model.market.mobility.sea.mdm.F9_MDM_VSL;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -68,4 +69,18 @@ public class MDM_T_VSL {
     @Getter
     @Setter
     String f9eVslCode;
+
+    public void setAllData(F9_MDM_VSL f9MdmVsl) {
+        setBuildYear(f9MdmVsl.getBuildYear());
+        setCallSign(f9MdmVsl.getCallSign());
+        setCapacityTeu(f9MdmVsl.getCapacityTeu());
+        setDataOwner(f9MdmVsl.getDataOwner());
+        setF9eVslCode(f9MdmVsl.getF9eVslCode());
+        setFlagCode(f9MdmVsl.getFlagCode());
+        setFlagName(f9MdmVsl.getFlagName());
+        setImoNumber(f9MdmVsl.getImoNumber());
+        setVesselClass(f9MdmVsl.getVesselClass());
+        setVesselCode(f9MdmVsl.getVesselCode());
+        setVesselName(f9MdmVsl.getVesselName());
+    }
 }

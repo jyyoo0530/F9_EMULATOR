@@ -44,11 +44,11 @@ public class UnlocodeMDM {
                         .readValues(csvFile2);
                 List<F9_MDM_LOCATION> locationMDM2 = f9MdmLocationIter2.readAll();
                 List<MDM_T_PORT> locationMDM3 = new ArrayList<>();
-
+                
                 locationMDM2.forEach(a -> {
-                   MDM_T_PORT b = new MDM_T_PORT();
+                    MDM_T_PORT b = new MDM_T_PORT();
                     b.setAllData(a);
-                   locationMDM3.add(b);
+                    mdmTPortMySqlRepo.save(b);
                 });
 
 
