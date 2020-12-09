@@ -15,7 +15,7 @@ public class UriStore {
     @Getter
     String UriMarketMobilitySeaSked = "https://api.maerskline.com/maeu/schedules/vessel?"; // vesselCode=128&vesselName=ANNA+MAERSK&fromDate=2021-01-01&toDate=2021-02-01
     @Getter
-    String UriTradeMakeNewOffer = "https://api.freight9.com:8080/api/v1/product/offer/new";
+    String UriTradeMakeNewOffer = "http://api.freight9.com:8080/api/v1/product/offer/new";
     @Getter
     String UriMarketMobilityPort_MaerskDetail = "https://api.maerskline.com/locations?type=city&cityName="; //type=city & cityName=durres
     @Getter

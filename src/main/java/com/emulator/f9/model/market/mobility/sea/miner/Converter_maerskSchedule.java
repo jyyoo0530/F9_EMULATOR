@@ -1,5 +1,7 @@
 package com.emulator.f9.model.market.mobility.sea.miner;
 
+import com.emulator.f9.model.ftr.MDM_T_PORT;
+import com.emulator.f9.model.ftr.MDM_T_PORT_MySqlRepository;
 import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD;
 import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD_ReactiveMongoRepository;
 import com.emulator.f9.model.market.mobility.sea.mdm.F9_MDM_LOCATION;
@@ -45,33 +47,8 @@ public class Converter_maerskSchedule {
     ) {
         F9_MDM_LOCATION f9MdmLocation = new F9_MDM_LOCATION();
         F9_MDM_LOCATION sample;
-        try {
-            sample = f9MdmLocationRepo.findByLocationCode(mskPortMdm.getUnLocCode()).block();
-        } catch (Exception e) {
-            System.out.println("Log             :.............There is no matching f9LocationId in F9E_MDM_LOCATION");
-            System.out.println("Exception!!     :com.f9e.emulator.service.Converter_maerskSchedule.convertPortMdm()");
-            f9MdmLocation.setF9LocationId("MSK_" + mskPortMdm.getMaerskGeoLocationId());
-            f9MdmLocation.setRegionCode("UNDEFINED");
-            f9MdmLocation.setRegionName("UNDEFINED");
-            f9MdmLocation.setSubRegionCode("UNDEFINED");
-            f9MdmLocation.setSubRegionName("UNDEFINED");
-            f9MdmLocation.setCountryCode(mskPortMdm.getCountryCode());
-            f9MdmLocation.setCountryName(mskPortMdm.getCountryName());
-            f9MdmLocation.setSubCountryCode("UNDEFINED");
-            f9MdmLocation.setSubCountryName("UNDEFINED");
-            f9MdmLocation.setLocationCode(mskPortMdm.getMaerskRkstCode());
-            f9MdmLocation.setLocationName(mskPortMdm.getCityName());
-            f9MdmLocation.setLocationNameWithDiacritics(mskPortMdm.getCityName());
-            f9MdmLocation.setLocationStatus("UNDEFINED");
-            f9MdmLocation.setLocationFunction("UNDEFINED");
-            f9MdmLocation.setLocationDate("UNDEFINED");
-            f9MdmLocation.setLocationLatitude("UNDEFINED");
-            f9MdmLocation.setLocationLongitude("UNDEFINED");
-            f9MdmLocation.setMdmOwnerCode("MSK");
-            f9MdmLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId());
-            return f9MdmLocation;
-        }
-        try {
+        if (f9MdmLocationRepo.findByLocationCodeAndMdmOwnerCode(mskPortMdm.getUnLocCode(), "MSK").blockLast() != null) {
+            sample = f9MdmLocationRepo.findByLocationCodeAndMdmOwnerCode(mskPortMdm.getUnLocCode(), "MSK").blockLast();
             f9MdmLocation.setF9LocationId("MSK_" + mskPortMdm.getMaerskGeoLocationId());
             f9MdmLocation.setRegionCode(sample.getRegionCode());
             f9MdmLocation.setRegionName(sample.getRegionName());
@@ -91,11 +68,135 @@ public class Converter_maerskSchedule {
             f9MdmLocation.setLocationLongitude(sample.getLocationLongitude());
             f9MdmLocation.setMdmOwnerCode("MSK");
             f9MdmLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId());
-            return f9MdmLocation;
-        } catch (Exception e) {
+        } else if (f9MdmLocationRepo.findByLocationCodeAndMdmOwnerCode(mskPortMdm.getUnLocCode(), "MSK").blockLast() == null) {
+            System.out.println("Log             :.............There is no matching f9LocationId in F9E_MDM_LOCATION");
+            System.out.println("Warning!!     :com.f9e.emulator.service.Converter_maerskSchedule.convertPortMdm()");
+            f9MdmLocation.setF9LocationId("MSK_" + mskPortMdm.getMaerskGeoLocationId());
+            f9MdmLocation.setRegionCode("UNDEFINED");
+            f9MdmLocation.setRegionName("UNDEFINED");
+            f9MdmLocation.setSubRegionCode("UNDEFINED");
+            f9MdmLocation.setSubRegionName("UNDEFINED");
+            f9MdmLocation.setCountryCode(mskPortMdm.getCountryCode());
+            f9MdmLocation.setCountryName(mskPortMdm.getCountryName());
+            f9MdmLocation.setSubCountryCode("UNDEFINED");
+            f9MdmLocation.setSubCountryName("UNDEFINED");
+            f9MdmLocation.setLocationCode(mskPortMdm.getMaerskRkstCode());
+            f9MdmLocation.setLocationName(mskPortMdm.getCityName());
+            f9MdmLocation.setLocationNameWithDiacritics(mskPortMdm.getCityName());
+            f9MdmLocation.setLocationStatus("UNDEFINED");
+            f9MdmLocation.setLocationFunction("UNDEFINED");
+            f9MdmLocation.setLocationDate("UNDEFINED");
+            f9MdmLocation.setLocationLatitude("UNDEFINED");
+            f9MdmLocation.setLocationLongitude("UNDEFINED");
+            f9MdmLocation.setMdmOwnerCode("MSK");
+            f9MdmLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId());
+        } else {
             System.out.println("Exception!!     :com.f9e.emulator.service.Converter_maerskSchedule.convertPortMdm()");
-            return f9MdmLocation;
         }
+        return f9MdmLocation;
+    }
+
+    // 1) UnLococde가 있는 경우, unlocode를 찾아서 업데이트(f9m)
+    // 2) UnLocdoe가 없는 경우, mskrqstcode와 일치하는 locationcode로 업데이트(f9m)
+    // 3) 3이 아닌경우, 도시명 + 국가명이 일치하는 것으로 업데이트(f9m)
+    // 4) 위 3가지가 아닌경우, undefined로 업데이
+    public MDM_T_PORT convertPortMdm2(
+            F9E_MSK_PORTMDM mskPortMdm,
+            MDM_T_PORT_MySqlRepository mdmTPortMySqlRepo,
+            int process
+    ) {
+        MDM_T_PORT newLocation = new MDM_T_PORT();
+        switch (process) {
+            case 1:
+                MDM_T_PORT mdmTPort = mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("F9M", mskPortMdm.getUnLocCode());
+                newLocation.setF9LocationId("MSK"+mskPortMdm.getMaerskRkstCode()); // msk
+                newLocation.setMdmOwnerCode("MSK"); // msk
+                newLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId()); // msk
+                newLocation.setRegionCode(mdmTPort.getRegionCode());
+                newLocation.setRegionName(mdmTPort.getRegionName());
+                newLocation.setSubRegionCode(mdmTPort.getSubRegionCode());
+                newLocation.setSubRegionName(mdmTPort.getSubRegionName());
+                newLocation.setCountryCode(mskPortMdm.getCountryCode()); // msk
+                newLocation.setCountryName(mskPortMdm.getCountryName());  // msk
+                newLocation.setSubCountryCode(mdmTPort.getSubCountryCode());
+                newLocation.setSubCountryName(mdmTPort.getSubCountryName());
+                newLocation.setLocationCode(mskPortMdm.getMaerskRkstCode());  // msk
+                newLocation.setLocationName(mskPortMdm.getCityName());  //msk
+                newLocation.setLocationLatitude(mdmTPort.getLocationLatitude());
+                newLocation.setLocationLongitude(mdmTPort.getLocationLongitude());
+                newLocation.setLocationFunction(mdmTPort.getLocationFunction());
+                newLocation.setLocationDate(mdmTPort.getLocationDate());
+                newLocation.setLocationStatus(mdmTPort.getLocationStatus());
+                newLocation.setLocationNameWithDiacritics(mdmTPort.getLocationNameWithDiacritics());
+                break;
+            case 2:
+                MDM_T_PORT mdmTPort2 = mdmTPortMySqlRepo.findByMdmOwnerCodeAndCountryCodeAndLocationName("F9M", mskPortMdm.getCountryCode(), mskPortMdm.getCityName());
+                newLocation.setF9LocationId("MSK"+mskPortMdm.getMaerskRkstCode()); // msk
+                newLocation.setMdmOwnerCode("MSK"); // msk
+                newLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId()); // msk
+                newLocation.setRegionCode(mdmTPort2.getRegionCode());
+                newLocation.setRegionName(mdmTPort2.getRegionName());
+                newLocation.setSubRegionCode(mdmTPort2.getSubRegionCode());
+                newLocation.setSubRegionName(mdmTPort2.getSubRegionName());
+                newLocation.setCountryCode(mskPortMdm.getCountryCode()); // msk
+                newLocation.setCountryName(mskPortMdm.getCountryName());  // msk
+                newLocation.setSubCountryCode(mdmTPort2.getSubCountryCode());
+                newLocation.setSubCountryName(mdmTPort2.getSubCountryName());
+                newLocation.setLocationCode(mskPortMdm.getMaerskRkstCode());  // msk
+                newLocation.setLocationName(mskPortMdm.getCityName());  //msk
+                newLocation.setLocationLatitude(mdmTPort2.getLocationLatitude());
+                newLocation.setLocationLongitude(mdmTPort2.getLocationLongitude());
+                newLocation.setLocationFunction(mdmTPort2.getLocationFunction());
+                newLocation.setLocationDate(mdmTPort2.getLocationDate());
+                newLocation.setLocationStatus(mdmTPort2.getLocationStatus());
+                newLocation.setLocationNameWithDiacritics(mdmTPort2.getLocationNameWithDiacritics());
+                break;
+            case 3:
+                MDM_T_PORT mdmTPort3 = mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("F9M", mskPortMdm.getMaerskGeoLocationId());
+                newLocation.setF9LocationId("MSK"+mskPortMdm.getMaerskRkstCode()); // msk
+                newLocation.setMdmOwnerCode("MSK"); // msk
+                newLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId()); // msk
+                newLocation.setRegionCode(mdmTPort3.getRegionCode());
+                newLocation.setRegionName(mdmTPort3.getRegionName());
+                newLocation.setSubRegionCode(mdmTPort3.getSubRegionCode());
+                newLocation.setSubRegionName(mdmTPort3.getSubRegionName());
+                newLocation.setCountryCode(mskPortMdm.getCountryCode()); // msk
+                newLocation.setCountryName(mskPortMdm.getCountryName());  // msk
+                newLocation.setSubCountryCode(mdmTPort3.getSubCountryCode());
+                newLocation.setSubCountryName(mdmTPort3.getSubCountryName());
+                newLocation.setLocationCode(mskPortMdm.getMaerskRkstCode());  // msk
+                newLocation.setLocationName(mskPortMdm.getCityName());  //msk
+                newLocation.setLocationLatitude(mdmTPort3.getLocationLatitude());
+                newLocation.setLocationLongitude(mdmTPort3.getLocationLongitude());
+                newLocation.setLocationFunction(mdmTPort3.getLocationFunction());
+                newLocation.setLocationDate(mdmTPort3.getLocationDate());
+                newLocation.setLocationStatus(mdmTPort3.getLocationStatus());
+                newLocation.setLocationNameWithDiacritics(mdmTPort3.getLocationNameWithDiacritics());
+                break;
+            case 4:
+                newLocation.setF9LocationId("MSK"+mskPortMdm.getMaerskRkstCode()); // msk
+                newLocation.setMdmOwnerCode("MSK"); // msk
+                newLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId()); // msk
+                newLocation.setRegionCode("UNDEFINED");
+                newLocation.setRegionName("UNDEFINED");
+                newLocation.setSubRegionCode("UNDEFINED");
+                newLocation.setSubRegionName("UNDEFINED");
+                newLocation.setCountryCode(mskPortMdm.getCountryCode()); // msk
+                newLocation.setCountryName(mskPortMdm.getCountryName());  // msk
+                newLocation.setSubCountryCode("UNDEFINED");
+                newLocation.setSubCountryName("UNDEFINED");
+                newLocation.setLocationCode(mskPortMdm.getMaerskRkstCode());  // msk
+                newLocation.setLocationName(mskPortMdm.getCityName());  //msk
+                newLocation.setLocationLatitude("UNDEFINED");
+                newLocation.setLocationLongitude("UNDEFINED");
+                newLocation.setLocationFunction("UNDEFINED");
+                newLocation.setLocationDate("UNDEFINED");
+                newLocation.setLocationStatus("UNDEFINED");
+                newLocation.setLocationNameWithDiacritics("UNDEFINED");
+                break;
+        }
+
+        return newLocation;
     }
 
     public List<F9_SEA_SKD> convertMskSked(
@@ -185,6 +286,7 @@ public class Converter_maerskSchedule {
 
                         // 5-2) 선박 디테일 설정
                         scheduleRow.setVesselName(vesselName);
+                        scheduleRow.setVesselCapacityTeu(Integer.parseInt(f9MdmVslRepo.findByVesselCode(vesselCode).block().getCapacityTeu().replaceAll("[^0-9]", "")));
 
                         // 5-3) 서비스 디테일 설정
                         scheduleRow.setServiceLaneName(finalServiceCode + "_NotYetDefined");
@@ -192,17 +294,18 @@ public class Converter_maerskSchedule {
                         // 5-4) from 디테일 설정(loc + skd)
                         String fromLocationStatus = "";
                         String test1 = fromMDM.getLocationFunction();
-                        if (test1.contains("4")) {
+                        if (test1.contains("1") || test1.equals("UNDEFINED")) {
                             fromLocationStatus = "SeaPort";
                         } else {
                             fromLocationStatus = "Inland";
                         }
                         Calendar calendar = Calendar.getInstance();
+                        int productweekTest = calendar.get(Calendar.WEEK_OF_YEAR);
                         int year = Integer.parseInt(c.getArrival().substring(0, 4));
-                        int month = Integer.parseInt(c.getArrival().substring(4, 6));
-                        int dayOfMonth = Integer.parseInt(c.getArrival().substring(6, 7));
+                        int month = Integer.parseInt(c.getArrival().substring(5, 7));
+                        int dayOfMonth = Integer.parseInt(c.getArrival().substring(8, 10));
                         calendar.set(Calendar.YEAR, year);
-                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.MONTH, month - 1);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                         String productWeek = String.valueOf((year * 100 + calendar.get(Calendar.WEEK_OF_YEAR)));
                         String fromETA = c.getArrival().replaceAll("[^\\d.]", "");
@@ -219,7 +322,7 @@ public class Converter_maerskSchedule {
                         // 5-5) to 디테일 설정(loc + skd)
                         String toLocationStatus = "";
                         String test2 = toMDM.getLocationFunction();
-                        if (test2.contains("4")) {
+                        if (test2.contains("1") || test2.equals("UNDEFINED")) {
                             toLocationStatus = "SeaPort";
                         } else {
                             toLocationStatus = "Inland";

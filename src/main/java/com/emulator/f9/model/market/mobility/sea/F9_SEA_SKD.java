@@ -53,6 +53,10 @@ public class F9_SEA_SKD {
 
     @Getter
     @Setter
+    int vesselCapacityTeu;                //--1) 선박 크기
+
+    @Getter
+    @Setter
     String fromKey;                      //  2) 어디서 ( From, locationCode )
 
     @Getter

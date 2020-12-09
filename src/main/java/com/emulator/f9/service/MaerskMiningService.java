@@ -1,5 +1,7 @@
 package com.emulator.f9.service;
 
+import com.emulator.f9.model.ftr.MDM_T_PORT;
+import com.emulator.f9.model.ftr.MDM_T_PORT_MySqlRepository;
 import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD;
 import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD_ReactiveMongoRepository;
 import com.emulator.f9.model.market.mobility.sea.mdm.F9_MDM_LOCATION;
@@ -8,11 +10,10 @@ import com.emulator.f9.model.market.mobility.sea.mdm.F9_MDM_VSL;
 import com.emulator.f9.model.market.mobility.sea.mdm.F9_MDM_VSL_ReactiveMongoRepository;
 import com.emulator.f9.model.market.mobility.sea.miner.Converter_maerskSchedule;
 import com.emulator.f9.model.market.mobility.sea.miner.maerskSchedule.*;
-import com.emulator.f9.model.tmp.MDM_T_PORT;
-import com.emulator.f9.model.tmp.MDM_T_PORT_MySqlRepository;
-import com.emulator.f9.model.tmp.SCH_SRC;
-import com.emulator.f9.model.tmp.SCH_SRC_MySqlRepository;
+import com.emulator.f9.model.ftr.SCH_SRC;
+import com.emulator.f9.model.ftr.SCH_SRC_MySqlRepository;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -210,6 +211,67 @@ public class MaerskMiningService {
         return f9eMskPortmdm;
     }
 
+    public F9E_MSK_PORTMDM getPortMdm2(String locationName, String geoLocationId) {
+        F9E_MSK_PORTMDM f9eMskPortmdm = new F9E_MSK_PORTMDM();
+        System.out.println(locationName);
+        String url = maerskPortDetailUri + locationName.replace(" ", "+");
+        if(!locationName.contains(" - ")){
+            String  response = restTemplate.getForObject(url, String.class).replace("\"\"", "\"");
+
+            int length;
+            try {
+                length = new JsonParser().parse(response).getAsJsonArray().size();
+            } catch (Exception e) {
+                length = 0;
+                System.out.println("MSK Port Detail List is not 'List'");
+                e.printStackTrace();
+            }
+            if (length == 0) {
+                try {
+                    JsonObject test = new JsonParser().parse(response).getAsJsonObject();
+                    System.out.println(test);
+                    length = -1;
+                } catch (Exception e) {
+                    System.out.println("Exception!!   :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
+                }
+            }
+
+            switch (length) {
+                case -1:
+                    f9eMskPortmdm.setAllData(response);
+                case 0:
+                    System.out.println("Exception!!   :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
+                case 1:
+                    String response2 = "";
+                    try {
+                        JsonArray test = new JsonParser().parse(response.replace("\"\"", "")).getAsJsonArray();
+                        response2 = test.get(0).toString().replace("\"\"", "");
+                    } catch (Exception e) {
+                        response2 = response;
+                        System.out.println("Warning!!     :....................response length is 1 and not an array");
+                        System.out.println("Warning!!     :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
+                    }
+                    f9eMskPortmdm.setAllData(response2);
+                default:
+                    JsonArray response3 = new JsonParser().parse(response).getAsJsonArray();
+                    try {
+                        response3.forEach(z -> {
+                            F9E_MSK_PORTMDM test = new F9E_MSK_PORTMDM();
+                            test.setAllData(z.toString().replace("\"\"", ""));
+                            if (test.getMaerskGeoLocationId().equals(geoLocationId)) {
+                                f9eMskPortmdm.setAllData(z.toString().replace("\"\"", ""));
+                            }
+                        });
+                    } catch (Exception e) {
+                        System.out.println("Exception!!   :...........................There is no matching result !!");
+                        System.out.println("Exception!!   :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
+                    }
+            }
+        }
+
+        return f9eMskPortmdm;
+    }
+
     public boolean checkF9eMdmLocation(String srcCode, F9_MDM_LOCATION_ReactiveMongoRepository f9MdmLocationRepo) {
         try {
             int result = 0 / f9MdmLocationRepo.findById("MSK_" + srcCode).block().getLocationCode().length();
@@ -230,6 +292,56 @@ public class MaerskMiningService {
             System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.updateF9MdmLocation()");
         }
     }
+
+    public int checkF9eMdmLocation2(F9E_MSK_PORTMDM f9eMskPortmdm, MDM_T_PORT_MySqlRepository mdmTPortMySqlRepo) {
+        int process = 4;
+        String result = "fail";
+        // 1) Unlocode가 있는지?
+
+        try {
+            System.out.println(f9eMskPortmdm.getUnLocCode());
+            process = 1;
+            result = "success";
+        } catch (Exception e) {
+            System.out.println("There is no Unlocode in F9E_MSK_PORTMDM");
+        }
+
+
+        // 2) 1)이 실패면, 도시명 + 국가명이 일치하는 것이 있는지
+        if (result.equals("fail")) {
+            try {
+                System.out.println(mdmTPortMySqlRepo.findByMdmOwnerCodeAndCountryCodeAndLocationName("F9M", f9eMskPortmdm.getCountryCode(), f9eMskPortmdm.getCityName()));
+                process = 2;
+                result = "success";
+            } catch (Exception e) {
+                System.out.println("There is no matching result with locationName+CountryName");
+            }
+        }
+
+
+        // 3) 2)가 실패면, msrkrqstCode아 locationCode가 일치하는 것이 있는지
+        if (result.equals("fail")) {
+            try {
+                System.out.println(mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("F9M", f9eMskPortmdm.getMaerskRkstCode()));
+                process = 3;
+            } catch (Exception e) {
+                System.out.println("There is no matching result with geoLocationId");
+            }
+        }
+
+
+        return process;
+    }
+
+    public void updateF9MdmLocation2(F9E_MSK_PORTMDM f9eMskPortmdm, MDM_T_PORT_MySqlRepository mdmTPortMySqlRepo, int process) {
+        try {
+            MDM_T_PORT mdmTPort = mskConverter.convertPortMdm2(f9eMskPortmdm, mdmTPortMySqlRepo, process);
+            mdmTPortMySqlRepo.save(mdmTPort);
+        } catch (Exception e) {
+            System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.updateF9MdmLocation()");
+        }
+    }
+
 
     public List<F9_SEA_SKD> parseIntoF9SeaSkd(
             List<F9E_MSK_SKED_VSL> f9eMskSkedVsls,

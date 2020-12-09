@@ -1,28 +1,3878 @@
-[
-  {
-    "type": "CITY",
-    "maerskGeoLocationId": "2PQPHB9GF3S0A",
-    "unLocCode": "REREU",
-    "countryName": "Reunion",
-    "countryCode": "RE",
-    "cityName": "Port Reunion",
-    "maerskRkstCode": "REREU",
-    "maerskRktsCode": "RE1",
-    "timezoneId": "Indian/Reunion",
-    "brands": [
-      "MAEU",
-      "MCPU",
-      "SAFM",
-      "SEAU",
-      "SEJJ"
-    ],
-    "brandNames": [
-      "MCC Transport",
-      "Maersk Line",
-      "Safmarine",
-      "SeaGo Line",
-      "SeaLand"
-    ],
-    "countryGeoId": "1111111111113"
-  }
-]
+{
+  "allYn": "0",
+  "expireYn": "0",
+  "masterContractNumber": "M202012081545169664730000030",
+  "offerPaymentPlanCode": "01PS",
+  "offerPaymentTermCode": "01",
+  "offerRdTermCode": "01",
+  "offerTransactionTypeCode": "01",
+  "offerTypeCode": "S",
+  "timeInForceCode": "0",
+  "tradeCompanyCode": "USR00",
+  "tradeMarketTypeCode": "01",
+  "tradeRoleCode": "001",
+  "virtualGroupAgreementYn": "0",
+  "virtualGroupOfferYn": "0",
+  "whatIfAgreementYn": "0",
+  "offerLineItems": [
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202109",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 17816,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202127",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 17816,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202139",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 17816,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202106",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 17816,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202115",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 17816,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202110",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 17816,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202107",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 17816,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202108",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 17816,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202112",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 18340,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202124",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 18340,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202136",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 18340,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202111",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 16652,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202123",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 16652,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202135",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 16652,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202137",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 14730,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202102",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 14730,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202113",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 14730,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202125",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 14730,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202138",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 19462,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202101",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 19462,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    },
+    {
+      "balancedPaymentRatio": 0.1,
+      "baseYearWeek": "202126",
+      "firstPaymentRatio": 0.3,
+      "middlePaymentRatio": 0.6,
+      "offerPrice": 1000.0,
+      "offerQty": 19462,
+      "tradeContainerSizeCode": "01",
+      "tradeContainerTypeCode": "01",
+      "offerPrices": [
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "01",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "02",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "03",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "01",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "02",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "03",
+          "offerPrice": 1000.0
+        },
+        {
+          "containerSizeCode": "04",
+          "containerTypeCode": "04",
+          "offerPrice": 1000.0
+        }
+      ]
+    }
+  ],
+  "offerCarriers": [
+    {
+      "offerCarrierCode": "MSK"
+    }
+  ],
+  "offerRoutes": [
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "01",
+      "offerRegSeq": 1
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "02",
+      "offerRegSeq": 1
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "03",
+      "offerRegSeq": 1
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "04",
+      "offerRegSeq": 1
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "01",
+      "offerRegSeq": 2
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "02",
+      "offerRegSeq": 2
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 2
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 2
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "01",
+      "offerRegSeq": 3
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "02",
+      "offerRegSeq": 3
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "03",
+      "offerRegSeq": 3
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "04",
+      "offerRegSeq": 3
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "01",
+      "offerRegSeq": 4
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "02",
+      "offerRegSeq": 4
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "03",
+      "offerRegSeq": 4
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "04",
+      "offerRegSeq": 4
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "01",
+      "offerRegSeq": 5
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "02",
+      "offerRegSeq": 5
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 5
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 5
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "01",
+      "offerRegSeq": 6
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "02",
+      "offerRegSeq": 6
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "03",
+      "offerRegSeq": 6
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "04",
+      "offerRegSeq": 6
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "01",
+      "offerRegSeq": 7
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "02",
+      "offerRegSeq": 7
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "03",
+      "offerRegSeq": 7
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "04",
+      "offerRegSeq": 7
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "01",
+      "offerRegSeq": 8
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "02",
+      "offerRegSeq": 8
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "03",
+      "offerRegSeq": 8
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "04",
+      "offerRegSeq": 8
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "01",
+      "offerRegSeq": 9
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "02",
+      "offerRegSeq": 9
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "03",
+      "offerRegSeq": 9
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "04",
+      "offerRegSeq": 9
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "01",
+      "offerRegSeq": 10
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "02",
+      "offerRegSeq": 10
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 10
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 10
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "01",
+      "offerRegSeq": 11
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "02",
+      "offerRegSeq": 11
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "03",
+      "offerRegSeq": 11
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "04",
+      "offerRegSeq": 11
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "01",
+      "offerRegSeq": 12
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "02",
+      "offerRegSeq": 12
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "03",
+      "offerRegSeq": 12
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "04",
+      "offerRegSeq": 12
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "01",
+      "offerRegSeq": 13
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "02",
+      "offerRegSeq": 13
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 13
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 13
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "01",
+      "offerRegSeq": 14
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "02",
+      "offerRegSeq": 14
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "03",
+      "offerRegSeq": 14
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "04",
+      "offerRegSeq": 14
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "01",
+      "offerRegSeq": 15
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "02",
+      "offerRegSeq": 15
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "03",
+      "offerRegSeq": 15
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "04",
+      "offerRegSeq": 15
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "01",
+      "offerRegSeq": 16
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "02",
+      "offerRegSeq": 16
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "03",
+      "offerRegSeq": 16
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "04",
+      "offerRegSeq": 16
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "01",
+      "offerRegSeq": 17
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "02",
+      "offerRegSeq": 17
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "03",
+      "offerRegSeq": 17
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "04",
+      "offerRegSeq": 17
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "01",
+      "offerRegSeq": 18
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "02",
+      "offerRegSeq": 18
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 18
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 18
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "01",
+      "offerRegSeq": 19
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "02",
+      "offerRegSeq": 19
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "03",
+      "offerRegSeq": 19
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "04",
+      "offerRegSeq": 19
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "01",
+      "offerRegSeq": 20
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "02",
+      "offerRegSeq": 20
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "03",
+      "offerRegSeq": 20
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "04",
+      "offerRegSeq": 20
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "01",
+      "offerRegSeq": 21
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "02",
+      "offerRegSeq": 21
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 21
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 21
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "01",
+      "offerRegSeq": 22
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "02",
+      "offerRegSeq": 22
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "03",
+      "offerRegSeq": 22
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "04",
+      "offerRegSeq": 22
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "01",
+      "offerRegSeq": 23
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "02",
+      "offerRegSeq": 23
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "03",
+      "offerRegSeq": 23
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "04",
+      "offerRegSeq": 23
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "01",
+      "offerRegSeq": 24
+    },
+    {
+      "locationCode": "OMSLV",
+      "locationName": "Salalah",
+      "locationTypeCode": "02",
+      "offerRegSeq": 24
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "03",
+      "offerRegSeq": 24
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "04",
+      "offerRegSeq": 24
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "01",
+      "offerRegSeq": 25
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "02",
+      "offerRegSeq": 25
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "03",
+      "offerRegSeq": 25
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "04",
+      "offerRegSeq": 25
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "01",
+      "offerRegSeq": 26
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "02",
+      "offerRegSeq": 26
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 26
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 26
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "01",
+      "offerRegSeq": 27
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "02",
+      "offerRegSeq": 27
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "03",
+      "offerRegSeq": 27
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "04",
+      "offerRegSeq": 27
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "01",
+      "offerRegSeq": 28
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "02",
+      "offerRegSeq": 28
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "03",
+      "offerRegSeq": 28
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "04",
+      "offerRegSeq": 28
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "01",
+      "offerRegSeq": 29
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "02",
+      "offerRegSeq": 29
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 29
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 29
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "01",
+      "offerRegSeq": 30
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "02",
+      "offerRegSeq": 30
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "03",
+      "offerRegSeq": 30
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "04",
+      "offerRegSeq": 30
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "01",
+      "offerRegSeq": 31
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "02",
+      "offerRegSeq": 31
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "03",
+      "offerRegSeq": 31
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "04",
+      "offerRegSeq": 31
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "01",
+      "offerRegSeq": 32
+    },
+    {
+      "locationCode": "AEAUH",
+      "locationName": "Abu Dhabi",
+      "locationTypeCode": "02",
+      "offerRegSeq": 32
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "03",
+      "offerRegSeq": 32
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "04",
+      "offerRegSeq": 32
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "01",
+      "offerRegSeq": 33
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "02",
+      "offerRegSeq": 33
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "03",
+      "offerRegSeq": 33
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "04",
+      "offerRegSeq": 33
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "01",
+      "offerRegSeq": 34
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "02",
+      "offerRegSeq": 34
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 34
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 34
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "01",
+      "offerRegSeq": 35
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "02",
+      "offerRegSeq": 35
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "03",
+      "offerRegSeq": 35
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "04",
+      "offerRegSeq": 35
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "01",
+      "offerRegSeq": 36
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "02",
+      "offerRegSeq": 36
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "03",
+      "offerRegSeq": 36
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "04",
+      "offerRegSeq": 36
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "01",
+      "offerRegSeq": 37
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "02",
+      "offerRegSeq": 37
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 37
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 37
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "01",
+      "offerRegSeq": 38
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "02",
+      "offerRegSeq": 38
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "03",
+      "offerRegSeq": 38
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "04",
+      "offerRegSeq": 38
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "01",
+      "offerRegSeq": 39
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "02",
+      "offerRegSeq": 39
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "03",
+      "offerRegSeq": 39
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "04",
+      "offerRegSeq": 39
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "01",
+      "offerRegSeq": 40
+    },
+    {
+      "locationCode": "AEJAL",
+      "locationName": "Jebel Ali",
+      "locationTypeCode": "02",
+      "offerRegSeq": 40
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "03",
+      "offerRegSeq": 40
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "04",
+      "offerRegSeq": 40
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "01",
+      "offerRegSeq": 41
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "02",
+      "offerRegSeq": 41
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "03",
+      "offerRegSeq": 41
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "04",
+      "offerRegSeq": 41
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "01",
+      "offerRegSeq": 42
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "02",
+      "offerRegSeq": 42
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 42
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 42
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "01",
+      "offerRegSeq": 43
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "02",
+      "offerRegSeq": 43
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "03",
+      "offerRegSeq": 43
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "04",
+      "offerRegSeq": 43
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "01",
+      "offerRegSeq": 44
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "02",
+      "offerRegSeq": 44
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "03",
+      "offerRegSeq": 44
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "04",
+      "offerRegSeq": 44
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "01",
+      "offerRegSeq": 45
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "02",
+      "offerRegSeq": 45
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 45
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 45
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "01",
+      "offerRegSeq": 46
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "02",
+      "offerRegSeq": 46
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "03",
+      "offerRegSeq": 46
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "04",
+      "offerRegSeq": 46
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "01",
+      "offerRegSeq": 47
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "02",
+      "offerRegSeq": 47
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "03",
+      "offerRegSeq": 47
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "04",
+      "offerRegSeq": 47
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "01",
+      "offerRegSeq": 48
+    },
+    {
+      "locationCode": "CNNPO",
+      "locationName": "Ningbo",
+      "locationTypeCode": "02",
+      "offerRegSeq": 48
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "03",
+      "offerRegSeq": 48
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "04",
+      "offerRegSeq": 48
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "01",
+      "offerRegSeq": 49
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "02",
+      "offerRegSeq": 49
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "03",
+      "offerRegSeq": 49
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "04",
+      "offerRegSeq": 49
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "01",
+      "offerRegSeq": 50
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "02",
+      "offerRegSeq": 50
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 50
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 50
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "01",
+      "offerRegSeq": 51
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "02",
+      "offerRegSeq": 51
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "03",
+      "offerRegSeq": 51
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "04",
+      "offerRegSeq": 51
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "01",
+      "offerRegSeq": 52
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "02",
+      "offerRegSeq": 52
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "03",
+      "offerRegSeq": 52
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "04",
+      "offerRegSeq": 52
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "01",
+      "offerRegSeq": 53
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "02",
+      "offerRegSeq": 53
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 53
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 53
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "01",
+      "offerRegSeq": 54
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "02",
+      "offerRegSeq": 54
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "03",
+      "offerRegSeq": 54
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "04",
+      "offerRegSeq": 54
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "01",
+      "offerRegSeq": 55
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "02",
+      "offerRegSeq": 55
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "03",
+      "offerRegSeq": 55
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "04",
+      "offerRegSeq": 55
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "01",
+      "offerRegSeq": 56
+    },
+    {
+      "locationCode": "CNSGH",
+      "locationName": "Shanghai",
+      "locationTypeCode": "02",
+      "offerRegSeq": 56
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "03",
+      "offerRegSeq": 56
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "04",
+      "offerRegSeq": 56
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 57
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 57
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "03",
+      "offerRegSeq": 57
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "04",
+      "offerRegSeq": 57
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 58
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 58
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 58
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 58
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 59
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 59
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "03",
+      "offerRegSeq": 59
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "04",
+      "offerRegSeq": 59
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 60
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 60
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "03",
+      "offerRegSeq": 60
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "04",
+      "offerRegSeq": 60
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 61
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 61
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 61
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 61
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 62
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 62
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "03",
+      "offerRegSeq": 62
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "04",
+      "offerRegSeq": 62
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 63
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 63
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "03",
+      "offerRegSeq": 63
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "04",
+      "offerRegSeq": 63
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 64
+    },
+    {
+      "locationCode": "CNNAN",
+      "locationName": "Nanao Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 64
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "03",
+      "offerRegSeq": 64
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "04",
+      "offerRegSeq": 64
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 65
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 65
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "03",
+      "offerRegSeq": 65
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "04",
+      "offerRegSeq": 65
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 66
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 66
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 66
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 66
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 67
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 67
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "03",
+      "offerRegSeq": 67
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "04",
+      "offerRegSeq": 67
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 68
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 68
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "03",
+      "offerRegSeq": 68
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "04",
+      "offerRegSeq": 68
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 69
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 69
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 69
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 69
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 70
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 70
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "03",
+      "offerRegSeq": 70
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "04",
+      "offerRegSeq": 70
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 71
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 71
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "03",
+      "offerRegSeq": 71
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "04",
+      "offerRegSeq": 71
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "01",
+      "offerRegSeq": 72
+    },
+    {
+      "locationCode": "CNYAT",
+      "locationName": "Yantian Pt",
+      "locationTypeCode": "02",
+      "offerRegSeq": 72
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "03",
+      "offerRegSeq": 72
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "04",
+      "offerRegSeq": 72
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "01",
+      "offerRegSeq": 73
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "02",
+      "offerRegSeq": 73
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "03",
+      "offerRegSeq": 73
+    },
+    {
+      "locationCode": "LKCMB",
+      "locationName": "Colombo",
+      "locationTypeCode": "04",
+      "offerRegSeq": 73
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "01",
+      "offerRegSeq": 74
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "02",
+      "offerRegSeq": 74
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 74
+    },
+    {
+      "locationCode": "EGSUC",
+      "locationName": "Suez Canal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 74
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "01",
+      "offerRegSeq": 75
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "02",
+      "offerRegSeq": 75
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "03",
+      "offerRegSeq": 75
+    },
+    {
+      "locationCode": "GBFXS",
+      "locationName": "Felixstowe",
+      "locationTypeCode": "04",
+      "offerRegSeq": 75
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "01",
+      "offerRegSeq": 76
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "02",
+      "offerRegSeq": 76
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "03",
+      "offerRegSeq": 76
+    },
+    {
+      "locationCode": "DEHAM",
+      "locationName": "Hamburg",
+      "locationTypeCode": "04",
+      "offerRegSeq": 76
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "01",
+      "offerRegSeq": 77
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "02",
+      "offerRegSeq": 77
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "03",
+      "offerRegSeq": 77
+    },
+    {
+      "locationCode": "BEANT",
+      "locationName": "Antwerp Churchill Terminal",
+      "locationTypeCode": "04",
+      "offerRegSeq": 77
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "01",
+      "offerRegSeq": 78
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "02",
+      "offerRegSeq": 78
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "03",
+      "offerRegSeq": 78
+    },
+    {
+      "locationCode": "GBLGP",
+      "locationName": "London Gateway Port",
+      "locationTypeCode": "04",
+      "offerRegSeq": 78
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "01",
+      "offerRegSeq": 79
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "02",
+      "offerRegSeq": 79
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "03",
+      "offerRegSeq": 79
+    },
+    {
+      "locationCode": "FRLEH",
+      "locationName": "Le Havre",
+      "locationTypeCode": "04",
+      "offerRegSeq": 79
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "01",
+      "offerRegSeq": 80
+    },
+    {
+      "locationCode": "MYTPP",
+      "locationName": "Tanjung Pelepas",
+      "locationTypeCode": "02",
+      "offerRegSeq": 80
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "03",
+      "offerRegSeq": 80
+    },
+    {
+      "locationCode": "MAPTM",
+      "locationName": "Tanger Med",
+      "locationTypeCode": "04",
+      "offerRegSeq": 80
+    }
+  ]
+}
