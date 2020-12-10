@@ -20,4 +20,28 @@ public class Membership {
     @Getter
     @Setter
     String access_token;
+
+    @Getter
+    @Setter
+    String accNr;
+
+    @Getter
+    @Setter
+    String AccOwnrCd;
+
+    @Getter
+    @Setter
+    String AccOwnrNm;
+
+    @Getter
+    @Setter
+    String bknNm;
+
+    @Getter
+    @Setter
+    String rteNo;
+
+    @Getter
+    @Setter
+    String swiftNo;
 }

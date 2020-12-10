@@ -3,6 +3,8 @@ package com.emulator.f9.rest;
 import com.emulator.f9.model.Membership;
 import com.emulator.f9.model.bot.ftr.mastercontract.*;
 import com.emulator.f9.model.bot.ftr.offer.*;
+import com.emulator.f9.model.ftr.membership.FMM_ACC;
+import com.emulator.f9.model.ftr.membership.FMM_ACC_MySqlRepository;
 import com.emulator.f9.model.market.index.SCFI;
 import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD;
 import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD_ReactiveMongoRepository;
@@ -105,6 +107,11 @@ public class F9E_RestClient {
     @Autowired
     FMC_MSTR_CTRK_PRCE_LST_MySqlRepository fmcMstrCtrkPrceLstMySqlRepo;
 
+    @Autowired
+    FMM_ACC_MySqlRepository fmmAccMySqlRepo;
+
+    @Autowired
+    SCH_GRP_RGN_MySqlRepository schGrpRgnMySqlRepo;
 
     Membership membership = new Membership();
 
@@ -270,6 +277,15 @@ public class F9E_RestClient {
         JsonObject token = new JsonParser().parse(Objects.requireNonNull(response.getBody())).getAsJsonObject();
         membership.setAccess_token(token.get("access_token").toString().replace("\"", ""));
         System.out.println(membership.getAccess_token());
+
+        // 5) initialize membership
+        FMM_ACC fmmAcc = fmmAccMySqlRepo.findByAccOwnCoCd("USR00");
+        membership.setAccNr(fmmAcc.getAccNr());
+        membership.setAccOwnrCd(fmmAcc.getAccOwnCoCd());
+        membership.setAccOwnrNm(fmmAcc.getAccOwnNm());
+        membership.setBknNm(fmmAcc.getBnkNm());
+        membership.setRteNo(fmmAcc.getRteNo());
+        membership.setSwiftNo(fmmAcc.getSwiftNo());
     }
 
     @RequestMapping(value = "generateScheduleGroup", method = RequestMethod.GET)
@@ -410,12 +426,13 @@ public class F9E_RestClient {
         System.out.println("/////////////////" + scheduleMasters.size() + " are updated" + "///////////////////");
     }
 
-    @RequestMapping(value = "transferScheduleGroup/ftr", method = RequestMethod.GET)
-    public void transferScheduleGroup() {
+    @RequestMapping(value = "transferScheduleGroup/ftr/{startIdx}", method = RequestMethod.GET)
+    public void transferScheduleGroup(@PathVariable("startIdx") int startIdx) {
         // --) find All group from F9S
         List<F9_SEA_SKD_GRP> scheduleMasters = scheduleMasterRepo.findAll().collect(Collectors.toList()).block();
         // 1) into the loop
-        scheduleMasters.forEach(a -> {
+        for(int i = startIdx; i < Objects.requireNonNull(scheduleMasters).size(); i++){
+            F9_SEA_SKD_GRP a = scheduleMasters.get(i);
             // 2) update Master -> ftr.SCH_GRP
             SCH_GRP schGrp = new SCH_GRP();
             schGrp.setSchGrpId(a.getServiceCode() + a.getServiceDirection());
@@ -451,8 +468,7 @@ public class F9E_RestClient {
                 schGrpRte.setSchGrpId(a.getServiceCode() + a.getServiceDirection());
                 schGrpRteMySqlRepo.save(schGrpRte);
             });
-        });
-
+        }
     }
 
     @RequestMapping(value = "scheduleGroupList/{targetSource}/get", method = RequestMethod.GET)
@@ -737,6 +753,17 @@ public class F9E_RestClient {
                 });
                 offer.setOfferRoutes(offerRoutes);
 
+                List<OfferAccounts> offerAccounts = new ArrayList<>();
+                OfferAccounts offerAccount = new OfferAccounts();
+                offerAccount.setAccountNumber(membership.getAccNr());
+                offerAccount.setAccountOwnerCompanyCode(membership.getAccOwnrCd());
+                offerAccount.setAccountOwnerName(membership.getAccOwnrNm());
+                offerAccount.setBankName(membership.getBknNm());
+                offerAccount.setRoutingNo(membership.getRteNo());
+                offerAccount.setSwiftCode(membership.getSwiftNo());
+                offerAccounts.add(offerAccount);
+                offer.setOfferAccounts(offerAccounts);
+
                 getJWTToken();
                 String result = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(offer).replaceAll("\\r", "").replaceAll("\\n", "");
                 System.out.println(result);
@@ -806,6 +833,66 @@ public class F9E_RestClient {
 
                 }
         );
+    }
+
+    @RequestMapping(value = "createSchGrpRgn", method = RequestMethod.GET)
+    public void createSchGrpRgn() {
+        List<SCH_GRP> schGrps = new ArrayList<>();
+        schGrpMySqlRepo.findAll().forEach(schGrps::add);
+
+        schGrps.forEach(b -> {
+            String schGrpId = b.getSchGrpId();
+            System.out.println(schGrpId);
+            List<String> polList = schGrpRteMySqlRepo.findBySchGrpIdAndSchRteLocTpCd(schGrpId, "02").stream().map(SCH_GRP_RTE::getSchRteLocCd).distinct().collect(Collectors.toList());
+            List<String> podList = schGrpRteMySqlRepo.findBySchGrpIdAndSchRteLocTpCd(schGrpId, "03").stream().map(SCH_GRP_RTE::getSchRteLocCd).distinct().collect(Collectors.toList());
+
+            polList.forEach(b1 -> {
+                MDM_T_PORT mdmTPort = mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("MSK", b1);
+                System.out.println(schGrpId + "    " + mdmTPort.getLocationCode() + "    " + mdmTPort.getRegionCode() + "   " + mdmTPort.getRegionName());
+                String doOrNot = "again";
+                try {
+                    SCH_GRP_RGN result = schGrpRgnMySqlRepo.findBySchGrpIdAndSchGrpRgnTpCdAndMdmRgnCdAndMdmRgnNm(b.getSchGrpId(), "02", mdmTPort.getRegionCode(), mdmTPort.getRegionName());
+                    int len = result.getSchGrpId().length();
+                } catch (NullPointerException ignored) {
+                    doOrNot = "do";
+                }
+                if (doOrNot.equals("do")
+                ) {
+                    SCH_GRP_RGN schGrpRgn = new SCH_GRP_RGN();
+                    schGrpRgn.setMdmRgnCd(mdmTPort.getRegionCode());
+                    schGrpRgn.setMdmRgnNm(mdmTPort.getRegionName());
+                    schGrpRgn.setSchGrpRgnTpCd("02");
+                    schGrpRgn.setSchGrpId(schGrpId);
+                    schGrpRgnMySqlRepo.save(schGrpRgn);
+                }
+
+            });
+
+            podList.forEach(b2 -> {
+                MDM_T_PORT mdmTPort = mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("MSK", b2);
+                System.out.println(schGrpId + "    " + mdmTPort.getLocationCode() + "    " + mdmTPort.getRegionCode() + "   " + mdmTPort.getRegionName());
+                String doOrNot = "again";
+                try {
+                    SCH_GRP_RGN result = schGrpRgnMySqlRepo.findBySchGrpIdAndSchGrpRgnTpCdAndMdmRgnCdAndMdmRgnNm(schGrpId, "03", mdmTPort.getRegionCode(), mdmTPort.getRegionName());
+                    int len = result.getSchGrpId().length();
+
+                } catch (NullPointerException ignored) {
+                    doOrNot = "do";
+                }
+                if (doOrNot.equals("do")
+                ) {
+                    SCH_GRP_RGN schGrpRgn = new SCH_GRP_RGN();
+                    schGrpRgn.setMdmRgnCd(mdmTPort.getRegionCode());
+                    schGrpRgn.setMdmRgnNm(mdmTPort.getRegionName());
+                    schGrpRgn.setSchGrpRgnTpCd("03");
+                    schGrpRgn.setSchGrpId(schGrpId);
+                    schGrpRgnMySqlRepo.save(schGrpRgn);
+                }
+
+            });
+
+
+        });
     }
 
 }

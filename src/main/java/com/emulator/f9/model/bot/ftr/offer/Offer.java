@@ -91,4 +91,8 @@ public class Offer {
     @Getter
     @Setter
     List<OfferRoutes> offerRoutes;
+
+    @Getter
+    @Setter
+    List<OfferAccounts> offerAccounts;
 }
