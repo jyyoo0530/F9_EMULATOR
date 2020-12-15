@@ -208,8 +208,8 @@ public class F9E_RestClient {
                         t.getServiceLaneKey(), t.getVoyageNumber(), t.getVesselKey(), t.getFromKey(), t.getToKey()
                 ).collect(Collectors.toList()).block();
                 if (chkSrcList.size() == 0) {
-//                    miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
-//                    miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPORARY
+                    miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
+                    miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPORARY
                 } else {
                     F9_SEA_SKD chkSrc = Collections.max(chkSrcList, Comparator.comparing(F9_SEA_SKD::getScheduleSeq));
                     if (!chkSrc.getFromETA().equals(t.getFromETA()) ||
@@ -219,8 +219,8 @@ public class F9E_RestClient {
                             !chkSrc.getToETB().equals(t.getToETB()) ||
                             !chkSrc.getToETD().equals(t.getToETD())) {
                         t.setScheduleSeq(chkSrc.getScheduleSeq() + 1);
-//                        miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
-//                        miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPO}
+                        miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
+                        miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPO}
                     } else if (chkSrc.getFromETA().equals(t.getFromETA()) &&
                             chkSrc.getFromETB().equals(t.getFromETB()) &&
                             chkSrc.getFromETD().equals(t.getFromETD()) &&
@@ -229,8 +229,8 @@ public class F9E_RestClient {
                             chkSrc.getToETD().equals(t.getToETD())) {
                         System.out.println("Already Exists!!");
                     } else {
-//                        miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
-//                        miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo);
+                        miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
+                        miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo);
                     }
                 }
 
