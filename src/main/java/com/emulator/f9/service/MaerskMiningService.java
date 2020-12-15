@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static com.emulator.f9.rest.UriStore.*;
 
@@ -47,6 +48,7 @@ public class MaerskMiningService {
             });
         } catch (Exception e) {
             System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.getActivePorts()");
+            e.printStackTrace();
         }
         return activePorts;
     }
@@ -64,6 +66,7 @@ public class MaerskMiningService {
             });
         } catch (Exception e) {
             System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.getActiveVessels()");
+            e.printStackTrace();
         }
         return activeVessels;
     }
@@ -80,6 +83,7 @@ public class MaerskMiningService {
             });
         } catch (Exception e) {
             System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.getVesselList()");
+            e.printStackTrace();
         }
 
         return vesselList;
@@ -95,6 +99,7 @@ public class MaerskMiningService {
         } catch (Exception e) {
             System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.getVesselDetail()");
             mskVslMdm.setDummyData(vesselCode, dummyName);
+            e.printStackTrace();
         }
 
         return mskVslMdm;
@@ -107,7 +112,9 @@ public class MaerskMiningService {
             return result;
         } catch (Exception e) {
             System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.checkF9eMdmVsl()");
+            e.printStackTrace();
             return result;
+
         }
 
     }
@@ -120,24 +127,25 @@ public class MaerskMiningService {
             ; ////find by ID
         } catch (Exception e) {
             System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.updateVesselMdm()");
+            e.printStackTrace();
         }
     }
 
-    public ArrayList<F9E_MSK_SKED_VSL> getVesselSked(String vesselCode, String extendedUri) {
+    public ArrayList<F9E_MSK_SKED_VSL> getVesselSked(String vesselCode, String extendedUri, F9E_MSK_SKED_VSL_ReactiveMongoRepository f9eMskSkedVslRepo) {
         ArrayList<F9E_MSK_SKED_VSL> listF9eMskSkedVsl = new ArrayList<>();
-
         try {
             String response = restTemplate.getForObject(maerskSeaSked + extendedUri, String.class);
             JsonArray listReponse = new JsonParser().parse(response.replace("\"\"", "\"")).getAsJsonObject().get("ports").getAsJsonArray();
             listReponse.forEach(x -> {
                 F9E_MSK_SKED_VSL f9eMskSkedVsl = new F9E_MSK_SKED_VSL();
-                f9eMskSkedVsl.setAllData(vesselCode, x.getAsJsonObject());
+                f9eMskSkedVsl.setAllData(vesselCode, x.getAsJsonObject(), f9eMskSkedVslRepo);
+                f9eMskSkedVslRepo.save(f9eMskSkedVsl).block();
                 listF9eMskSkedVsl.add(f9eMskSkedVsl);
             });
         } catch (Exception e) {
             System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.getVesselSked()");
+            e.printStackTrace();
         }
-
         return listF9eMskSkedVsl;
     }
 
@@ -146,7 +154,6 @@ public class MaerskMiningService {
         List<F9E_MSK_PORTMDM> f9eMskPortmdms = new ArrayList<>();
         String url = maerskPortDetailUri + locationName.replace(" ", "+");
         try {
-
             String response = restTemplate.getForObject(url, String.class).replace("\"\"", "\"");
             int length = new JsonParser().parse(response).getAsJsonArray().size();
 
@@ -207,6 +214,7 @@ public class MaerskMiningService {
             }
         } catch (Exception e) {
             System.out.println("Exception!!   :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
+            e.printStackTrace();
         }
         return f9eMskPortmdm;
     }
@@ -215,8 +223,8 @@ public class MaerskMiningService {
         F9E_MSK_PORTMDM f9eMskPortmdm = new F9E_MSK_PORTMDM();
         System.out.println(locationName);
         String url = maerskPortDetailUri + locationName.replace(" ", "+");
-        if(!locationName.contains(" - ")){
-            String  response = restTemplate.getForObject(url, String.class).replace("\"\"", "\"");
+        if (!locationName.contains(" - ")) {
+            String response = restTemplate.getForObject(url, String.class).replace("\"\"", "\"");
 
             int length;
             try {
@@ -233,6 +241,7 @@ public class MaerskMiningService {
                     length = -1;
                 } catch (Exception e) {
                     System.out.println("Exception!!   :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
+                    e.printStackTrace();
                 }
             }
 
@@ -265,6 +274,7 @@ public class MaerskMiningService {
                     } catch (Exception e) {
                         System.out.println("Exception!!   :...........................There is no matching result !!");
                         System.out.println("Exception!!   :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
+                        e.printStackTrace();
                     }
             }
         }
@@ -284,12 +294,38 @@ public class MaerskMiningService {
         }
     }
 
-    public void updateF9MdmLocation(F9E_MSK_PORTMDM f9eMskPortmdm, F9_MDM_LOCATION_ReactiveMongoRepository f9MdmLocationRepo) {
+    public void updateF9MdmLocation(F9E_MSK_PORTMDM f9eMskPortmdm, F9_MDM_LOCATION_ReactiveMongoRepository f9MdmLocationRepo, String locationName) {
         try {
-            F9_MDM_LOCATION f9MdmLocation = mskConverter.convertPortMdm(f9eMskPortmdm, f9MdmLocationRepo);
-            f9MdmLocationRepo.save(f9MdmLocation).block();
+            if(locationName.contains(" - ")){
+                F9_MDM_LOCATION f9MdmLocation = new F9_MDM_LOCATION();
+                Random rand = new Random();
+                f9MdmLocation.setF9LocationId(locationName+rand.nextInt(99999999));
+                f9MdmLocation.setLocationCode("UNDEFINED");
+                f9MdmLocation.setLocationName(locationName);
+                f9MdmLocation.setCountryCode("UNDEFINED");
+                f9MdmLocation.setCountryName("UNDEFINED");
+                f9MdmLocation.setSubCountryCode("UNDEFINED");
+                f9MdmLocation.setSubCountryName("UNDEFINED");
+                f9MdmLocation.setSubRegionCode("UNDEFINED");
+                f9MdmLocation.setSubRegionName("UNDEFINED");
+                f9MdmLocation.setRegionCode("UNDEFINED");
+                f9MdmLocation.setRegionName("UNDEFINED");
+                f9MdmLocation.setLocationDate("UNDEFINED");
+                f9MdmLocation.setLocationLatitude("UNDEFINED");
+                f9MdmLocation.setLocationLongitude("UNDEFINED");
+                f9MdmLocation.setMdmOwnerLocationId("UNDEFINED");
+                f9MdmLocation.setLocationStatus("UNDEFINED");
+                f9MdmLocation.setLocationFunction("UNDEFINED");
+                f9MdmLocation.setLocationNameWithDiacritics("UNDEFINED");
+                f9MdmLocation.setMdmOwnerCode("UNDEFINED");
+                f9MdmLocationRepo.save(f9MdmLocation).block();
+            }else{
+                F9_MDM_LOCATION f9MdmLocation = mskConverter.convertPortMdm(f9eMskPortmdm, f9MdmLocationRepo);
+                f9MdmLocationRepo.save(f9MdmLocation).block();
+            }
         } catch (Exception e) {
             System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.updateF9MdmLocation()");
+            e.printStackTrace();
         }
     }
 

@@ -66,7 +66,7 @@ public class F9E_MSK_PORTMDM {
         try {
             inputData = new JsonParser().parse(stringResponse).getAsJsonObject();
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         ArrayList<String> brndNms = new ArrayList<>();
         ArrayList<String> brnds = new ArrayList<>();

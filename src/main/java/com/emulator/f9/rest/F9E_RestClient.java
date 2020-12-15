@@ -113,6 +113,9 @@ public class F9E_RestClient {
     @Autowired
     SCH_GRP_RGN_MySqlRepository schGrpRgnMySqlRepo;
 
+    @Autowired
+    F9E_MSK_SKED_VSL_ReactiveMongoRepository f9eMskSkedVslRepo;
+
     Membership membership = new Membership();
 
     @RequestMapping(value = "mobility/sea/schedule/msk/{idx}", method = RequestMethod.GET)
@@ -162,7 +165,7 @@ public class F9E_RestClient {
             String fromDate = "&fromDate=" + formatter.format(calendar.getTime());
             calendar.add(Calendar.DATE, 29);
             String endDate = "&toDate=" + formatter.format(calendar.getTime());
-            ArrayList<F9E_MSK_SKED_VSL> extendedList = miningMaersk.getVesselSked(x, extensionUri + fromDate + endDate);
+            ArrayList<F9E_MSK_SKED_VSL> extendedList = miningMaersk.getVesselSked(x, extensionUri + fromDate + endDate, f9eMskSkedVslRepo);
 //            listF9eSeaSkd = Stream.concat(listF9eSeaSkd.stream(), extendedList.stream()).collect(Collectors.toCollection(ArrayList::new));
             while (extendedList.size() != 0) {
 
@@ -171,7 +174,7 @@ public class F9E_RestClient {
                 fromDate = "&fromDate=" + formatter.format(calendar.getTime());
                 calendar.add(Calendar.DATE, 29);
                 endDate = "&toDate=" + formatter.format(calendar.getTime());
-                extendedList = miningMaersk.getVesselSked(x, extensionUri + fromDate + endDate);
+                extendedList = miningMaersk.getVesselSked(x, extensionUri + fromDate + endDate, f9eMskSkedVslRepo);
                 listF9eSeaSkd = Stream.concat(listF9eSeaSkd.stream(), extendedList.stream()).collect(Collectors.toCollection(ArrayList::new));
 
                 // 4-1) generate port lists
@@ -186,10 +189,10 @@ public class F9E_RestClient {
                     boolean chkResult = miningMaersk.checkF9eMdmLocation(a, f9MdmLocationRepo);
                     // 4-2-1) get and update port code if not exists
                     String locationName = activePorts.stream().filter(b -> b.getGeoId().equals(a)).collect(Collectors.toList()).get(0).getLocationName();
-                    if (!chkResult) {
+                    if (!chkResult ) {
                         F9E_MSK_PORTMDM response = miningMaersk.getPortMdm(locationName, a);
-                        miningMaersk.updateF9MdmLocation(response, f9MdmLocationRepo);
-                        mdmVesselCloneService.cloneMdmPort(response, f9MdmLocationRepo, mdmTPortMySqlRepo); // TEMPORARY
+                        miningMaersk.updateF9MdmLocation(response, f9MdmLocationRepo, locationName);
+                        mdmVesselCloneService.cloneMdmPort(response, f9MdmLocationRepo, mdmTPortMySqlRepo, locationName); // TEMPORARY
                     }
                 });
             }
@@ -204,35 +207,33 @@ public class F9E_RestClient {
                 List<F9_SEA_SKD> chkSrcList = f9SeaSkdRepo.findByServiceLaneKeyAndVoyageNumberAndVesselKeyAndFromKeyAndToKey(
                         t.getServiceLaneKey(), t.getVoyageNumber(), t.getVesselKey(), t.getFromKey(), t.getToKey()
                 ).collect(Collectors.toList()).block();
-                F9_SEA_SKD chkSrc = Collections.max(chkSrcList, Comparator.comparing(F9_SEA_SKD::getScheduleSeq));
-                if (chkSrc == null
-                ) {
+                if (chkSrcList.size() == 0) {
                     miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
                     miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPORARY
-                } else if (
-                        !chkSrc.getFromETA().equals(t.getFromETA()) ||
-                                !chkSrc.getFromETB().equals(t.getFromETB()) ||
-                                !chkSrc.getFromETD().equals(t.getFromETD()) ||
-                                !chkSrc.getToETA().equals(t.getToETA()) ||
-                                !chkSrc.getToETB().equals(t.getToETB()) ||
-                                !chkSrc.getToETD().equals(t.getToETD())
-                ) {
-                    t.setScheduleSeq(chkSrc.getScheduleSeq() + 1);
-                    miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
-                    miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPO
-                } else if (
-                        chkSrc.getFromETA().equals(t.getFromETA()) &&
-                                chkSrc.getFromETB().equals(t.getFromETB()) &&
-                                chkSrc.getFromETD().equals(t.getFromETD()) &&
-                                chkSrc.getToETA().equals(t.getToETA()) &&
-                                chkSrc.getToETB().equals(t.getToETB()) &&
-                                chkSrc.getToETD().equals(t.getToETD())
-                ) {
-                    System.out.println("Already Exists!!");
                 } else {
-                    miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
-                    miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo);
+                    F9_SEA_SKD chkSrc = Collections.max(chkSrcList, Comparator.comparing(F9_SEA_SKD::getScheduleSeq));
+                    if (!chkSrc.getFromETA().equals(t.getFromETA()) ||
+                            !chkSrc.getFromETB().equals(t.getFromETB()) ||
+                            !chkSrc.getFromETD().equals(t.getFromETD()) ||
+                            !chkSrc.getToETA().equals(t.getToETA()) ||
+                            !chkSrc.getToETB().equals(t.getToETB()) ||
+                            !chkSrc.getToETD().equals(t.getToETD())) {
+                        t.setScheduleSeq(chkSrc.getScheduleSeq() + 1);
+                        miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
+                        miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPO}
+                    } else if (chkSrc.getFromETA().equals(t.getFromETA()) &&
+                            chkSrc.getFromETB().equals(t.getFromETB()) &&
+                            chkSrc.getFromETD().equals(t.getFromETD()) &&
+                            chkSrc.getToETA().equals(t.getToETA()) &&
+                            chkSrc.getToETB().equals(t.getToETB()) &&
+                            chkSrc.getToETD().equals(t.getToETD())) {
+                        System.out.println("Already Exists!!");
+                    } else {
+                        miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
+                        miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo);
+                    }
                 }
+
             });
             System.out.println("///////////////// " + vesselList.indexOf(x) + " out of " + vesselList.size() + " completed..!!" + " /////////////////");
         }
@@ -300,6 +301,7 @@ public class F9E_RestClient {
 
         // 2) ServiceLane.foreach()
         finalServiceLaneNames.forEach(a -> {
+            String serviceCode = Objects.requireNonNull(f9SeaSkdRepo.findByServiceLaneName(a).blockFirst()).getServiceLaneKey();
             List<F9_SEA_SKD> f9SeaSkds = f9SeaSkdRepo.findByServiceLaneName(a).collect(Collectors.toList()).block();
             Query query = new Query();
             query.addCriteria(Criteria.where("serviceLaneName").is(a));
@@ -395,7 +397,7 @@ public class F9E_RestClient {
                                 .summaryStatistics();
                         scheduleLineGroup.setProductWeek(String.valueOf(intSummaryStatistics.getMin()));
                         scheduleLineGroup.setScheduleAbstractDetails(scheduleAbstractDetails);
-                        scheduleLineGroup.setScheduleGroupId(a + intSummaryStatistics.getMin() + "");
+                        scheduleLineGroup.setScheduleGroupId(serviceCode + b + c + intSummaryStatistics.getMin());
                         scheduleLineGroup.setVesselCode(c);
                         scheduleLineGroup.setVesselCapacityTeu(voyNrFilteredF9SeaSkds.get(0).getVesselCapacityTeu());
                         scheduleLineGroups.add(scheduleLineGroup);
@@ -404,9 +406,7 @@ public class F9E_RestClient {
                 // 4-3) Put Service Group
                 scheduleMaster.setScheduleLineGroup(scheduleLineGroups);
                 scheduleMaster.setScheduleRouteGroup(scheduleRouteGroups);
-                scheduleMaster.setServiceCode(
-                        Objects.requireNonNull(f9SeaSkdRepo.findByServiceLaneName(a).blockFirst()).getServiceLaneKey()
-                );
+                scheduleMaster.setServiceCode(serviceCode);
                 scheduleMaster.setServiceName(a);
                 scheduleMaster.setServiceDirection(b);
                 IntSummaryStatistics intSummaryStatistics2 = scheduleLineGroups.stream()
@@ -415,14 +415,14 @@ public class F9E_RestClient {
                         .summaryStatistics();
                 scheduleMaster.setWeeklySupplyTeu((int) intSummaryStatistics2.getAverage());
                 scheduleMasters.add(scheduleMaster);
-                //////////////////////
+                System.out.println(scheduleMasters.size() + "    are updated");
             });
         });
         // 5) set data 1(주차) : N(scheduleId)
         // --> 현재로써는: 1. 웹 ui구현해서 디비수정, 2) 디비 직접 수정.
 
         // 6) SVC + SVC Weeks + SVC Routes
-        scheduleMasterRepo.saveAll(scheduleMasters).blockLast();
+//        scheduleMasterRepo.saveAll(scheduleMasters).blockLast();
         System.out.println("/////////////////" + scheduleMasters.size() + " are updated" + "///////////////////");
     }
 
@@ -431,7 +431,7 @@ public class F9E_RestClient {
         // --) find All group from F9S
         List<F9_SEA_SKD_GRP> scheduleMasters = scheduleMasterRepo.findAll().collect(Collectors.toList()).block();
         // 1) into the loop
-        for(int i = startIdx; i < Objects.requireNonNull(scheduleMasters).size(); i++){
+        for (int i = startIdx; i < Objects.requireNonNull(scheduleMasters).size(); i++) {
             F9_SEA_SKD_GRP a = scheduleMasters.get(i);
             // 2) update Master -> ftr.SCH_GRP
             SCH_GRP schGrp = new SCH_GRP();
@@ -643,8 +643,8 @@ public class F9E_RestClient {
                         break;
                     }
                 } catch (Exception e) {
-                    e.printStackTrace();
                     f9MdmSvcgrp.setServiceName(a.getServiceCode() + "_NotYetDefined");
+                    e.printStackTrace();
                 }
             }
 

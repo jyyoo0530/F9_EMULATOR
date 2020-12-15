@@ -92,6 +92,7 @@ public class Converter_maerskSchedule {
             f9MdmLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId());
         } else {
             System.out.println("Exception!!     :com.f9e.emulator.service.Converter_maerskSchedule.convertPortMdm()");
+
         }
         return f9MdmLocation;
     }
@@ -218,6 +219,7 @@ public class Converter_maerskSchedule {
         } catch (Exception e) {
             System.out.println("Exception in....:1) filter : serviceArr == serviceDep (exclude false value.)       ");
             System.out.println("Exception!!     :com.f9e.emulator.service.Converter_maerskSchedule.convertMskSked()");
+            e.printStackTrace();
         }
 
         // --1) check
@@ -228,6 +230,7 @@ public class Converter_maerskSchedule {
         } catch (Exception e) {
             System.out.println("Exception in....:--1) ServiceList is more than 1                                   ");
             System.out.println("Exception!!     :com.f9e.emulator.service.Converter_maerskSchedule.convertMskSked()");
+            e.printStackTrace();
         }
 
         // 2) filter : voyageArr != voyageDep (exclude false value.)
@@ -236,6 +239,7 @@ public class Converter_maerskSchedule {
         } catch (Exception e) {
             System.out.println("Exception in....:2) filter : voyageArr != voyageDep (exclude false value.)         ");
             System.out.println("Exception!!     :com.f9e.emulator.service.Converter_maerskSchedule.convertMskSked()");
+            e.printStackTrace();
         }
 
         // 3) makeSeqList : voyageLinkList
@@ -247,6 +251,7 @@ public class Converter_maerskSchedule {
         } catch (Exception e) {
             System.out.println("Exception in....:3) makeSeqList : voyageLinkList                                   ");
             System.out.println("Exception!!     :com.f9e.emulator.service.Converter_maerskSchedule.convertMskSked()");
+            e.printStackTrace();
         }
 
         // 4) schedule convert main job
@@ -359,6 +364,7 @@ public class Converter_maerskSchedule {
         } catch (Exception e) {
             System.out.println("Exception in....:4) schedule convert main job                                      ");
             System.out.println("Exception!!     :com.f9e.emulator.service.Converter_maerskSchedule.convertMskSked()");
+            e.printStackTrace();
         }
 
         List<F9_SEA_SKD> finalF9SeaSkds = f9SeaSkds.stream().distinct().collect(Collectors.toList());

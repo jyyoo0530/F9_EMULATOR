@@ -13,7 +13,7 @@ public class F9_SEA_SKD {
     @Id
     @Getter
     @Setter
-    String scheduleId;                   // --) ID
+    String scheduleId;                   // --) ID serviceLane + voyageNumber + vesselKey + fromScheduleReferenceKey + toScheduleReferenceKey
 
     @Getter
     @Setter
