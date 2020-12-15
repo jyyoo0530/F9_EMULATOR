@@ -110,7 +110,7 @@ public class Converter_maerskSchedule {
         switch (process) {
             case 1:
                 MDM_T_PORT mdmTPort = mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("F9M", mskPortMdm.getUnLocCode());
-                newLocation.setF9LocationId("MSK"+mskPortMdm.getMaerskRkstCode()); // msk
+                newLocation.setF9LocationId("MSK" + mskPortMdm.getMaerskRkstCode()); // msk
                 newLocation.setMdmOwnerCode("MSK"); // msk
                 newLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId()); // msk
                 newLocation.setRegionCode(mdmTPort.getRegionCode());
@@ -132,7 +132,7 @@ public class Converter_maerskSchedule {
                 break;
             case 2:
                 MDM_T_PORT mdmTPort2 = mdmTPortMySqlRepo.findByMdmOwnerCodeAndCountryCodeAndLocationName("F9M", mskPortMdm.getCountryCode(), mskPortMdm.getCityName());
-                newLocation.setF9LocationId("MSK"+mskPortMdm.getMaerskRkstCode()); // msk
+                newLocation.setF9LocationId("MSK" + mskPortMdm.getMaerskRkstCode()); // msk
                 newLocation.setMdmOwnerCode("MSK"); // msk
                 newLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId()); // msk
                 newLocation.setRegionCode(mdmTPort2.getRegionCode());
@@ -154,7 +154,7 @@ public class Converter_maerskSchedule {
                 break;
             case 3:
                 MDM_T_PORT mdmTPort3 = mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("F9M", mskPortMdm.getMaerskGeoLocationId());
-                newLocation.setF9LocationId("MSK"+mskPortMdm.getMaerskRkstCode()); // msk
+                newLocation.setF9LocationId("MSK" + mskPortMdm.getMaerskRkstCode()); // msk
                 newLocation.setMdmOwnerCode("MSK"); // msk
                 newLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId()); // msk
                 newLocation.setRegionCode(mdmTPort3.getRegionCode());
@@ -175,7 +175,7 @@ public class Converter_maerskSchedule {
                 newLocation.setLocationNameWithDiacritics(mdmTPort3.getLocationNameWithDiacritics());
                 break;
             case 4:
-                newLocation.setF9LocationId("MSK"+mskPortMdm.getMaerskRkstCode()); // msk
+                newLocation.setF9LocationId("MSK" + mskPortMdm.getMaerskRkstCode()); // msk
                 newLocation.setMdmOwnerCode("MSK"); // msk
                 newLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId()); // msk
                 newLocation.setRegionCode("UNDEFINED");
@@ -312,7 +312,15 @@ public class Converter_maerskSchedule {
                         calendar.set(Calendar.YEAR, year);
                         calendar.set(Calendar.MONTH, month - 1);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        String productWeek = String.valueOf((year * 100 + calendar.get(Calendar.WEEK_OF_YEAR)));
+                        String productWeek = "";
+                        if ((month - 1) > 10 && calendar.get(Calendar.WEEK_OF_YEAR) < 10) {
+                            productWeek = String.valueOf(((year + 1) * 100 + calendar.get(Calendar.WEEK_OF_YEAR)));
+                        } else if ((month - 1) < 1 && calendar.get(Calendar.WEEK_OF_YEAR) > 49) {
+                            productWeek = String.valueOf(((year - 1) * 100 + calendar.get(Calendar.WEEK_OF_YEAR)));
+                        } else {
+                            productWeek = String.valueOf((year * 100 + calendar.get(Calendar.WEEK_OF_YEAR)));
+                        }
+
                         String fromETA = c.getArrival().replaceAll("[^\\d.]", "");
                         String fromETB = c.getArrival().replaceAll("[^\\d.]", "");
                         String fromETD = c.getDeparture().replaceAll("[^\\d.]", "");

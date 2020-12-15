@@ -189,7 +189,7 @@ public class F9E_RestClient {
                     boolean chkResult = miningMaersk.checkF9eMdmLocation(a, f9MdmLocationRepo);
                     // 4-2-1) get and update port code if not exists
                     String locationName = activePorts.stream().filter(b -> b.getGeoId().equals(a)).collect(Collectors.toList()).get(0).getLocationName();
-                    if (!chkResult ) {
+                    if (!chkResult) {
                         F9E_MSK_PORTMDM response = miningMaersk.getPortMdm(locationName, a);
                         miningMaersk.updateF9MdmLocation(response, f9MdmLocationRepo, locationName);
                         mdmVesselCloneService.cloneMdmPort(response, f9MdmLocationRepo, mdmTPortMySqlRepo, locationName); // TEMPORARY
@@ -208,8 +208,8 @@ public class F9E_RestClient {
                         t.getServiceLaneKey(), t.getVoyageNumber(), t.getVesselKey(), t.getFromKey(), t.getToKey()
                 ).collect(Collectors.toList()).block();
                 if (chkSrcList.size() == 0) {
-                    miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
-                    miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPORARY
+//                    miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
+//                    miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPORARY
                 } else {
                     F9_SEA_SKD chkSrc = Collections.max(chkSrcList, Comparator.comparing(F9_SEA_SKD::getScheduleSeq));
                     if (!chkSrc.getFromETA().equals(t.getFromETA()) ||
@@ -219,8 +219,8 @@ public class F9E_RestClient {
                             !chkSrc.getToETB().equals(t.getToETB()) ||
                             !chkSrc.getToETD().equals(t.getToETD())) {
                         t.setScheduleSeq(chkSrc.getScheduleSeq() + 1);
-                        miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
-                        miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPO}
+//                        miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
+//                        miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPO}
                     } else if (chkSrc.getFromETA().equals(t.getFromETA()) &&
                             chkSrc.getFromETB().equals(t.getFromETB()) &&
                             chkSrc.getFromETD().equals(t.getFromETD()) &&
@@ -229,13 +229,16 @@ public class F9E_RestClient {
                             chkSrc.getToETD().equals(t.getToETD())) {
                         System.out.println("Already Exists!!");
                     } else {
-                        miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
-                        miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo);
+//                        miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
+//                        miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo);
                     }
                 }
 
             });
             System.out.println("///////////////// " + vesselList.indexOf(x) + " out of " + vesselList.size() + " completed..!!" + " /////////////////");
+            if (z == vesselList.size()) {
+                z = 0;
+            }
         }
     }
 
@@ -289,8 +292,8 @@ public class F9E_RestClient {
         membership.setSwiftNo(fmmAcc.getSwiftNo());
     }
 
-    @RequestMapping(value = "generateScheduleGroup", method = RequestMethod.GET)
-    public void generateScheduleGroup() {
+    @RequestMapping(value = "generateScheduleGroup/{idx}", method = RequestMethod.GET)
+    public void generateScheduleGroup(@PathVariable("idx") int idx) {
         // --) scheduleMasters 생
         List<F9_SEA_SKD_GRP> scheduleMasters = new ArrayList<>();
         // 1) Service Lane List 생성
@@ -300,7 +303,8 @@ public class F9E_RestClient {
         System.out.println("Logging      :" + " There are " + serviceLaneNames.size() + " serviceLanes to be arranged");
 
         // 2) ServiceLane.foreach()
-        finalServiceLaneNames.forEach(a -> {
+        for (int i = idx; i < finalServiceLaneNames.size(); i++) {
+            String a = finalServiceLaneNames.get(i);
             String serviceCode = Objects.requireNonNull(f9SeaSkdRepo.findByServiceLaneName(a).blockFirst()).getServiceLaneKey();
             List<F9_SEA_SKD> f9SeaSkds = f9SeaSkdRepo.findByServiceLaneName(a).collect(Collectors.toList()).block();
             Query query = new Query();
@@ -342,9 +346,9 @@ public class F9E_RestClient {
                 sizes.add("Start");
                 finalPolCodes.forEach(b3 -> {
                     finalPodCodes.forEach(b4 -> {
-                        for (int i = 1; i < 5; i++) {
+                        for (int j = 1; j < 5; j++) {
                             ScheduleRouteGroup scheduleRouteGroup = new ScheduleRouteGroup();
-                            switch (i) {
+                            switch (j) {
                                 case 1:
                                     scheduleRouteGroup.setLocationCode(b3);
                                     break;
@@ -358,7 +362,7 @@ public class F9E_RestClient {
                                     scheduleRouteGroup.setLocationCode(b4);
                                     break;
                             }
-                            scheduleRouteGroup.setLocationTypeCode("0" + i);
+                            scheduleRouteGroup.setLocationTypeCode("0" + j);
                             scheduleRouteGroup.setRegSeq(sizes.size());
                             scheduleRouteGroups.add(scheduleRouteGroup);
                         }
@@ -417,7 +421,8 @@ public class F9E_RestClient {
                 scheduleMasters.add(scheduleMaster);
                 System.out.println(scheduleMasters.size() + "    are updated");
             });
-        });
+        }
+
         // 5) set data 1(주차) : N(scheduleId)
         // --> 현재로써는: 1. 웹 ui구현해서 디비수정, 2) 디비 직접 수정.
 

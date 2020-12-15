@@ -139,8 +139,10 @@ public class MaerskMiningService {
             listReponse.forEach(x -> {
                 F9E_MSK_SKED_VSL f9eMskSkedVsl = new F9E_MSK_SKED_VSL();
                 f9eMskSkedVsl.setAllData(vesselCode, x.getAsJsonObject(), f9eMskSkedVslRepo);
-                f9eMskSkedVslRepo.save(f9eMskSkedVsl).block();
-                listF9eMskSkedVsl.add(f9eMskSkedVsl);
+                if (!f9eMskSkedVsl.getTerminal().contains("Canal") || !f9eMskSkedVsl.getTerminal().contains("Bunker")) {
+                    f9eMskSkedVslRepo.save(f9eMskSkedVsl).block();
+                    listF9eMskSkedVsl.add(f9eMskSkedVsl);
+                }
             });
         } catch (Exception e) {
             System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.getVesselSked()");
@@ -296,10 +298,10 @@ public class MaerskMiningService {
 
     public void updateF9MdmLocation(F9E_MSK_PORTMDM f9eMskPortmdm, F9_MDM_LOCATION_ReactiveMongoRepository f9MdmLocationRepo, String locationName) {
         try {
-            if(locationName.contains(" - ")){
+            if (locationName.contains(" - ")) {
                 F9_MDM_LOCATION f9MdmLocation = new F9_MDM_LOCATION();
                 Random rand = new Random();
-                f9MdmLocation.setF9LocationId(locationName+rand.nextInt(99999999));
+                f9MdmLocation.setF9LocationId(locationName + rand.nextInt(99999999));
                 f9MdmLocation.setLocationCode("UNDEFINED");
                 f9MdmLocation.setLocationName(locationName);
                 f9MdmLocation.setCountryCode("UNDEFINED");
@@ -319,7 +321,7 @@ public class MaerskMiningService {
                 f9MdmLocation.setLocationNameWithDiacritics("UNDEFINED");
                 f9MdmLocation.setMdmOwnerCode("UNDEFINED");
                 f9MdmLocationRepo.save(f9MdmLocation).block();
-            }else{
+            } else {
                 F9_MDM_LOCATION f9MdmLocation = mskConverter.convertPortMdm(f9eMskPortmdm, f9MdmLocationRepo);
                 f9MdmLocationRepo.save(f9MdmLocation).block();
             }
