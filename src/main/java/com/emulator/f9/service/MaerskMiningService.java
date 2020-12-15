@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import static com.emulator.f9.rest.UriStore.*;
@@ -29,6 +30,7 @@ public class MaerskMiningService {
     String maerskVesselActiveUri = getUriMarketMobilityVessel_MaerskActive();
     String maerskVesselDetailUri = getUriMarketMobilityVessel_MaerskDetail();
     String maerskPortDetailUri = getUriMarketMobilityPort_MaerskDetail();
+    String maerskPortDetailUri2 = getUriMarketMobilityPort_MaerskDetail2();
     String maerskSeaSked = getUriMarketMobilitySeaSked();
     String maerskPortActiveUri = getUriMarketMobilityPort_MaerskActive();
 
@@ -154,66 +156,10 @@ public class MaerskMiningService {
     public F9E_MSK_PORTMDM getPortMdm(String locationName, String locationCode) {
         F9E_MSK_PORTMDM f9eMskPortmdm = new F9E_MSK_PORTMDM();
         List<F9E_MSK_PORTMDM> f9eMskPortmdms = new ArrayList<>();
-        String url = maerskPortDetailUri + locationName.replace(" ", "+");
+        String url = maerskPortDetailUri2 + locationCode;
         try {
-            String response = restTemplate.getForObject(url, String.class).replace("\"\"", "\"");
-            int length = new JsonParser().parse(response).getAsJsonArray().size();
-
-            switch (length) {
-                case 0:
-                    System.out.println("Exception!!   :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
-                case 1:
-                    String response2 = "";
-                    try {
-                        JsonArray test = new JsonParser().parse(response.replace("\"\"", "")).getAsJsonArray();
-                        response2 = test.get(0).toString().replace("\"\"", "");
-                    } catch (Exception e) {
-                        response2 = response;
-                        System.out.println("Warning!!     :....................response length is 1 and not an array");
-                        System.out.println("Warning!!     :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
-                    }
-                    f9eMskPortmdm.setAllData(response2);
-                    System.out.println("Warning!!     :..................response is not object but list(object)");
-                    System.out.println("Warning!!     :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
-                case 2:
-                case 3:
-                case 4:
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                case 11:
-                case 12:
-                case 13:
-                case 14:
-                case 15:
-                case 16:
-                case 17:
-                case 18:
-                case 19:
-                case 20:
-                case 21:
-                case 22:
-                case 23:
-                case 24:
-                case 25:
-                    JsonArray response3 = new JsonParser().parse(response).getAsJsonArray();
-                    response3.forEach(z -> {
-                        F9E_MSK_PORTMDM test = new F9E_MSK_PORTMDM();
-                        test.setAllData(z.toString().replace("\"\"", ""));
-                        String testi = test.getMaerskGeoLocationId();
-                        if (testi.equals(locationCode)) {
-                            System.out.println("THis is it!!");
-                            f9eMskPortmdm.setAllData(z.toString());
-                        } else {
-                            System.out.println("Something's Wrong");
-                        }
-                    });
-                    System.out.println("Warning!!     :..................response is not object but list(object)");
-                    System.out.println("Warning!!     :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
-            }
+            String response = Objects.requireNonNull(restTemplate.getForObject(url, String.class)).replace("\"\"", "\"");
+            f9eMskPortmdm.setAllData(response);
         } catch (Exception e) {
             System.out.println("Exception!!   :com.f9e.emulator.service.MaerskMiningService.getPortMdm()");
             e.printStackTrace();

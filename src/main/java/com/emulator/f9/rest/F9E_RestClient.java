@@ -183,10 +183,10 @@ public class F9E_RestClient {
                 });
                 List<String> distinctPortList = portList.stream().distinct().collect(Collectors.toList());
 
-                // 4-2) update port lists
+                // 4-2) update port lists  //// locationName이 null인 에러 발생가능..
                 distinctPortList.forEach(a -> {
                     // 4-2-1) check if port code is exists in the collection
-                    boolean chkResult = miningMaersk.checkF9eMdmLocation(a, f9MdmLocationRepo);
+                    boolean chkResult = miningMaersk.checkF9eMdmLocation(a, f9MdmLocationRepo); // 고쳐야됨
                     // 4-2-1) get and update port code if not exists
                     String locationName = activePorts.stream().filter(b -> b.getGeoId().equals(a)).collect(Collectors.toList()).get(0).getLocationName();
                     if (!chkResult) {

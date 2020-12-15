@@ -19,5 +19,7 @@ public class UriStore {
     @Getter
     String UriMarketMobilityPort_MaerskDetail = "https://api.maerskline.com/locations?type=city&cityName="; //type=city & cityName=durres
     @Getter
+    String UriMarketMobilityPort_MaerskDetail2 = "https://api.maerskline.com/locations/"; //type=city & cityName=durres
+    @Getter
     String UriMarketMobilityVessel_MaerskDetail = "https://api.maerskline.com/vessels?"; //maerskCode=766
 }
