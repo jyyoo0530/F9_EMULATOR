@@ -9,8 +9,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document(collection = "F9_SEA_SKD")
 public class F9_SEA_SKD {
-    /// master column
     @Id
+    @Getter
+    @Setter
+    String id; // scheduleId + scheduleSeq
+
+    /// master column
     @Getter
     @Setter
     String scheduleId;                   // --) ID serviceLane + voyageNumber + vesselKey + fromScheduleReferenceKey + toScheduleReferenceKey

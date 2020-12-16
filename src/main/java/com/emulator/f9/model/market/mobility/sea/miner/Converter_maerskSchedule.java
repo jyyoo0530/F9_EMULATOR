@@ -204,6 +204,7 @@ public class Converter_maerskSchedule {
             List<F9E_MSK_SKED_VSL> f9eMskSkedVsls,
             F9_MDM_LOCATION_ReactiveMongoRepository f9MdmLocationRepo,
             F9_MDM_VSL_ReactiveMongoRepository f9MdmVslRepo,
+            F9_SEA_SKD_ReactiveMongoRepository f9SeaSkdRepo,
             String vesselCode) {
         List<F9_SEA_SKD> f9SeaSkds = new ArrayList<>();
         List<F9E_MSK_SKED_VSL> updatedSrcList = new ArrayList<>();
@@ -352,7 +353,7 @@ public class Converter_maerskSchedule {
 
                         // 5-6) 마무으리 (아이디 // 시퀀스 // 생성일자 // owner/provider 부여
                         Calendar now = Calendar.getInstance();
-                        scheduleRow.setScheduleId("S" + vesselCode + finalServiceCode + fromETA + toETA + "MSK");
+                        scheduleRow.setScheduleId("S" + finalServiceCode + d.getVoyageArrival() + vesselCode + fromKey + toKey + "MSK");
                         scheduleRow.setScheduleSeq(0);
                         scheduleRow.setScheduleOwnerCode("MSK" + "_NotYetDefined");
                         scheduleRow.setDataCreationDate(now.getTime().toString());

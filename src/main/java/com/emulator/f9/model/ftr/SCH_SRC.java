@@ -16,7 +16,7 @@ public class SCH_SRC {
     long id;
 
     /// master column
-    @Column(name = "SCH_ID", unique = true)
+    @Column(name = "SCH_ID")
     @Getter
     @Setter
     String scheduleId;                   // --) ID

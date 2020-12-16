@@ -1,7 +1,6 @@
 package com.emulator.f9.service;
 
-import com.emulator.f9.model.ftr.MDM_T_PORT;
-import com.emulator.f9.model.ftr.MDM_T_PORT_MySqlRepository;
+import com.emulator.f9.model.ftr.*;
 import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD;
 import com.emulator.f9.model.market.mobility.sea.F9_SEA_SKD_ReactiveMongoRepository;
 import com.emulator.f9.model.market.mobility.sea.mdm.F9_MDM_LOCATION;
@@ -10,8 +9,6 @@ import com.emulator.f9.model.market.mobility.sea.mdm.F9_MDM_VSL;
 import com.emulator.f9.model.market.mobility.sea.mdm.F9_MDM_VSL_ReactiveMongoRepository;
 import com.emulator.f9.model.market.mobility.sea.miner.Converter_maerskSchedule;
 import com.emulator.f9.model.market.mobility.sea.miner.maerskSchedule.*;
-import com.emulator.f9.model.ftr.SCH_SRC;
-import com.emulator.f9.model.ftr.SCH_SRC_MySqlRepository;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -22,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import static com.emulator.f9.rest.UriStore.*;
 
@@ -107,18 +105,27 @@ public class MaerskMiningService {
         return mskVslMdm;
     }
 
-    public boolean checkF9eMdmVsl(String vesselCode, F9_MDM_VSL_ReactiveMongoRepository f9eMdmVslRepo) {
+    public boolean checkF9eMdmVsl(String vesselCode, F9_MDM_VSL_ReactiveMongoRepository f9eMdmVslRepo, MDM_T_VSL_MySqlRepository mdmTVslMySqlRepo, String db) {
         boolean result = false;
-        try {
-            result = f9eMdmVslRepo.findById(vesselCode).block().getSize() != 0;
-            return result;
-        } catch (Exception e) {
-            System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.checkF9eMdmVsl()");
-            e.printStackTrace();
-            return result;
-
+        switch (db) {
+            case "ftr":
+                try {
+                    result = (mdmTVslMySqlRepo.findByVesselCode(vesselCode).size() != 0);
+                } catch (Exception e) {
+                    System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.checkF9eMdmVsl()");
+                    e.printStackTrace();
+                }
+                break;
+            case "f9s":
+                try {
+                    result = (f9eMdmVslRepo.findAllByVesselCode(vesselCode).collect(Collectors.toList()).block().size() != 0);
+                } catch (Exception e) {
+                    System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.checkF9eMdmVsl()");
+                    e.printStackTrace();
+                }
+                break;
         }
-
+        return result;
     }
 
     public void updateVesselMdm(F9E_MSK_VSLMDM mskVesselMdm, F9_MDM_VSL_ReactiveMongoRepository f9eMdmVslRepo) {
@@ -141,9 +148,17 @@ public class MaerskMiningService {
             listReponse.forEach(x -> {
                 F9E_MSK_SKED_VSL f9eMskSkedVsl = new F9E_MSK_SKED_VSL();
                 f9eMskSkedVsl.setAllData(vesselCode, x.getAsJsonObject(), f9eMskSkedVslRepo);
-                if (!f9eMskSkedVsl.getTerminal().contains("Canal") || !f9eMskSkedVsl.getTerminal().contains("Bunker")) {
+                String terminal = f9eMskSkedVsl.getTerminal();
+                boolean test1 = terminal.contains("Canal");
+                boolean test2 = terminal.contains("Bunker");
+                boolean test3 = terminal.contains("Transit");
+                boolean test4 = terminal.contains("Strait");
+                if (test1 || test2 || test3 || test4) {
+                    System.out.println("This port is canal or bunkering purpose");
+                } else {
                     f9eMskSkedVslRepo.save(f9eMskSkedVsl).block();
                     listF9eMskSkedVsl.add(f9eMskSkedVsl);
+                    System.out.println(f9eMskSkedVsl.getTerminal() + " " + f9eMskSkedVsl.getScheduleKey());
                 }
             });
         } catch (Exception e) {
@@ -331,10 +346,11 @@ public class MaerskMiningService {
             List<F9E_MSK_SKED_VSL> f9eMskSkedVsls,
             F9_MDM_LOCATION_ReactiveMongoRepository f9MdmLocationRepo,
             F9_MDM_VSL_ReactiveMongoRepository f9MdmVslRepo,
+            F9_SEA_SKD_ReactiveMongoRepository f9SeaSkdRepo,
             String vesselCode) {
         List<F9_SEA_SKD> result = new ArrayList<>();
         try {
-            result = mskConverter.convertMskSked(f9eMskSkedVsls, f9MdmLocationRepo, f9MdmVslRepo, vesselCode);
+            result = mskConverter.convertMskSked(f9eMskSkedVsls, f9MdmLocationRepo, f9MdmVslRepo, f9SeaSkdRepo, vesselCode);
         } catch (Exception e) {
             System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.parseIntoF9SeaSkd()");
         }

@@ -14,6 +14,7 @@ import com.emulator.f9.model.ftr.*;
 import com.emulator.f9.service.MaerskMiningService;
 import com.emulator.f9.service.OfferMarketEsitmator;
 import com.emulator.f9.service.UnlocodeMDM;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -135,16 +136,21 @@ public class F9E_RestClient {
             String x = vesselList.get(z);
 
             // 2) check if F9_VSL_MDM exists
-            boolean chkVsl = miningMaersk.checkF9eMdmVsl(x, f9MdmVslRepo);
+            // 2-1) check f9s
+
+            // 2-2) check ftr
+            boolean chkVslF9s = miningMaersk.checkF9eMdmVsl(x, f9MdmVslRepo, mdmTVslMySqlRepo, "f9s");
+            boolean chkVslFtr = miningMaersk.checkF9eMdmVsl(x, f9MdmVslRepo, mdmTVslMySqlRepo, "ftr");
             String activeVesselName = activeVessels.stream()
                     .filter(b -> b.getCode().equals(x)).collect(Collectors.toList()).get(0).getName();
-
             // 3) get Vessel Detail
             F9E_MSK_VSLMDM mskVslMdm = miningMaersk.getVesselDetail(x, activeVesselName);
 
             // --) update Vessel MDM
-            if (!chkVsl) {
+            if (!chkVslF9s) {
                 miningMaersk.updateVesselMdm(mskVslMdm, f9MdmVslRepo);
+            }
+            if (!chkVslFtr) {
                 mdmVesselCloneService.cloneMdmVessel(mskVslMdm, mdmTVslMySqlRepo); /// Temporary
             }
 
@@ -198,7 +204,7 @@ public class F9E_RestClient {
             }
 
             // 5) convert to f9s vessel schedule
-            List<F9_SEA_SKD> f9SeaSkds = miningMaersk.parseIntoF9SeaSkd(listF9eSeaSkd, f9MdmLocationRepo, f9MdmVslRepo, x);
+            List<F9_SEA_SKD> f9SeaSkds = miningMaersk.parseIntoF9SeaSkd(listF9eSeaSkd, f9MdmLocationRepo, f9MdmVslRepo, f9SeaSkdRepo, x);
 
             // 6) update F9E_SEA_SKED(MongoDB and MySQL)
             f9SeaSkds.forEach(t -> {
@@ -212,25 +218,21 @@ public class F9E_RestClient {
                     miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPORARY
                 } else {
                     F9_SEA_SKD chkSrc = Collections.max(chkSrcList, Comparator.comparing(F9_SEA_SKD::getScheduleSeq));
-                    if (!chkSrc.getFromETA().equals(t.getFromETA()) ||
-                            !chkSrc.getFromETB().equals(t.getFromETB()) ||
-                            !chkSrc.getFromETD().equals(t.getFromETD()) ||
-                            !chkSrc.getToETA().equals(t.getToETA()) ||
-                            !chkSrc.getToETB().equals(t.getToETB()) ||
-                            !chkSrc.getToETD().equals(t.getToETD())) {
+                    boolean test1 = chkSrc.getFromETA().equals(t.getFromETA());
+                    boolean test2 = chkSrc.getFromETB().equals(t.getFromETB());
+                    boolean test3 = chkSrc.getFromETD().equals(t.getFromETD());
+                    boolean test4 = chkSrc.getToETA().equals(t.getToETA());
+                    boolean test5 = chkSrc.getToETB().equals(t.getToETB());
+                    boolean test6 = chkSrc.getToETD().equals(t.getToETD());
+                    if (test1 && test2 && test3 && test4 && test5 && test6) {
+                        t.setScheduleSeq(chkSrc.getScheduleSeq());
+                        u.setScheduleSeq(chkSrc.getScheduleSeq());
+                        System.out.println("FTR:     Already Exists!!");
+                    } else {
                         t.setScheduleSeq(chkSrc.getScheduleSeq() + 1);
+                        u.setScheduleSeq(chkSrc.getScheduleSeq() + 1);
                         miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
                         miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo); // TEMPO}
-                    } else if (chkSrc.getFromETA().equals(t.getFromETA()) &&
-                            chkSrc.getFromETB().equals(t.getFromETB()) &&
-                            chkSrc.getFromETD().equals(t.getFromETD()) &&
-                            chkSrc.getToETA().equals(t.getToETA()) &&
-                            chkSrc.getToETB().equals(t.getToETB()) &&
-                            chkSrc.getToETD().equals(t.getToETD())) {
-                        System.out.println("Already Exists!!");
-                    } else {
-                        miningMaersk.uploadF9SeaSkd(t, f9SeaSkdRepo);
-                        miningMaersk.uploadF9SeaSkdMySQL(u, schSrcMySqlRepo);
                     }
                 }
 
@@ -427,7 +429,7 @@ public class F9E_RestClient {
         // --> 현재로써는: 1. 웹 ui구현해서 디비수정, 2) 디비 직접 수정.
 
         // 6) SVC + SVC Weeks + SVC Routes
-//        scheduleMasterRepo.saveAll(scheduleMasters).blockLast();
+        scheduleMasterRepo.saveAll(scheduleMasters).blockLast();
         System.out.println("/////////////////" + scheduleMasters.size() + " are updated" + "///////////////////");
     }
 
@@ -678,7 +680,6 @@ public class F9E_RestClient {
     @RequestMapping(value = "market/createSellOffer/{masterContractNumber}/{iterator}", method = RequestMethod.GET)
     public void initializeMarket(@PathVariable("masterContractNumber") String masterContractNumber,
                                  @PathVariable("iterator") int iterator
-
     ) throws IOException {
         OfferMarketEsitmator estimator = new OfferMarketEsitmator();
         List<SCFI> priceNE = estimator.initialize("priceNE.csv");

@@ -18,5 +18,6 @@ public interface F9_SEA_SKD_ReactiveMongoRepository
             String fromKey,
             String toKey
     );
+    Flux<F9_SEA_SKD> findByScheduleId(String scheduleId);
 }
 

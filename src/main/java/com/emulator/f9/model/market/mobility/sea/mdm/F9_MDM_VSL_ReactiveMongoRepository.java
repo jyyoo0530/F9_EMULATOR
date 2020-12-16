@@ -4,10 +4,12 @@ import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.transaction.annotation.Transactional;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Transactional
 public interface F9_MDM_VSL_ReactiveMongoRepository
         extends ReactiveCrudRepository<F9_MDM_VSL, String> {
     Mono<F9_MDM_VSL> findByVesselCode(String vesselCode);
+    Flux<F9_MDM_VSL> findAllByVesselCode(String vesselCode);
 }

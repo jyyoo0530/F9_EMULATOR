@@ -26,7 +26,7 @@ public class F9E_MSK_SKED_VSL {
 
     @Getter
     @Setter
-    String scheduleKey; // SCHEDULE ID, getSrcVslCode() + getServiceArr() + getVoyageArrival() + getSrcPortCode() + getTerminalGeoId();
+    String scheduleKey; // SCHEDULE KEY, getSrcVslCode() + getServiceArr() + getVoyageArrival() + getSrcPortCode() + getTerminalGeoId()+MSK;
 
     @Getter
     @Setter
