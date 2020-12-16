@@ -35,6 +35,7 @@ import java.util.*;
 
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
+import static com.emulator.f9.model.market.mobility.sea.miner.ProcessMonitor.*;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -238,6 +239,7 @@ public class F9E_RestClient {
 
             });
             System.out.println("///////////////// " + vesselList.indexOf(x) + " out of " + vesselList.size() + " completed..!!" + " /////////////////");
+            setProcess(z);
             if (z == vesselList.size()) {
                 z = 0;
             }
@@ -899,6 +901,13 @@ public class F9E_RestClient {
 
 
         });
+    }
+
+    @RequestMapping(value = "process", method = RequestMethod.GET)
+    public ResponseEntity<Integer> getScheduleProcess(){
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("MyResponseHeader", "MyValue");
+        return new ResponseEntity<Integer>(getProcess(), responseHeaders, HttpStatus.CREATED);
     }
 
 }
