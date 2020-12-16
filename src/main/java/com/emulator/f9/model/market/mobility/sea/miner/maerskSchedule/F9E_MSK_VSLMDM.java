@@ -1,5 +1,6 @@
 package com.emulator.f9.model.market.mobility.sea.miner.maerskSchedule;
 
+import com.emulator.f9.model.ftr.MDM_T_VSL;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.Data;
@@ -94,6 +95,7 @@ public class F9E_MSK_VSLMDM {
         }
 
     }
+
     public void setDummyData(String dummyCode, String dummyName) {
         try {
             setBuildYear("DummyBuildYear");
@@ -146,6 +148,19 @@ public class F9E_MSK_VSLMDM {
             setName("UNDEFINED");
         }
 
+    }
+
+    public void setAllDataFromMdmFtr(MDM_T_VSL mdmTVsl) {
+        setBuildYear(mdmTVsl.getBuildYear());
+        setCallSign(mdmTVsl.getCallSign());
+        setCapacityTeu(mdmTVsl.getCapacityTeu());
+        setFlagCode(mdmTVsl.getFlagCode());
+        setFlagName(mdmTVsl.getFlagName());
+        setLongName(mdmTVsl.getVesselName());
+        setMaerskId(mdmTVsl.getF9eVslCode());
+        setVesselClass(mdmTVsl.getVesselClass());
+        setName(mdmTVsl.getVesselName());
+        setImoNumber(mdmTVsl.getImoNumber());
     }
 
 }

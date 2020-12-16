@@ -14,12 +14,10 @@ import com.emulator.f9.model.ftr.*;
 import com.emulator.f9.service.MaerskMiningService;
 import com.emulator.f9.service.OfferMarketEsitmator;
 import com.emulator.f9.service.UnlocodeMDM;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -29,7 +27,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -38,6 +35,8 @@ import static com.mongodb.client.model.Filters.eq;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static com.emulator.f9.model.market.mobility.sea.miner.PRG_F9_SEA_SKD.*;
 
 @RestController()
 public class F9E_RestClient {
@@ -133,26 +132,28 @@ public class F9E_RestClient {
 
         // --) get into loop (parallel computing으로 가야함..)
         for (int z = idx; z < vesselList.size(); z++) {
+
+
             String x = vesselList.get(z);
-
-            // 2) check if F9_VSL_MDM exists
-            // 2-1) check f9s
-
-            // 2-2) check ftr
-            boolean chkVslF9s = miningMaersk.checkF9eMdmVsl(x, f9MdmVslRepo, mdmTVslMySqlRepo, "f9s");
-            boolean chkVslFtr = miningMaersk.checkF9eMdmVsl(x, f9MdmVslRepo, mdmTVslMySqlRepo, "ftr");
             String activeVesselName = activeVessels.stream()
                     .filter(b -> b.getCode().equals(x)).collect(Collectors.toList()).get(0).getName();
-            // 3) get Vessel Detail
+
+            // 2) get Vessel Detail
             F9E_MSK_VSLMDM mskVslMdm = miningMaersk.getVesselDetail(x, activeVesselName);
 
             // --) update Vessel MDM
+            // 3) check if F9_VSL_MDM exists, and update if false
+            boolean chkVslF9s = miningMaersk.checkF9eMdmVsl(x, f9MdmVslRepo, mdmTVslMySqlRepo, "f9s");
+            boolean chkVslFtr = miningMaersk.checkF9eMdmVsl(x, f9MdmVslRepo, mdmTVslMySqlRepo, "ftr");
             if (!chkVslF9s) {
                 miningMaersk.updateVesselMdm(mskVslMdm, f9MdmVslRepo);
             }
             if (!chkVslFtr) {
                 mdmVesselCloneService.cloneMdmVessel(mskVslMdm, mdmTVslMySqlRepo); /// Temporary
+            } else {
+                mskVslMdm.setAllDataFromMdmFtr(mdmTVslMySqlRepo.findByVesselCode(x).get(0));
             }
+
 
             // --) check if vesselCapacityTeu exists
             if (mskVslMdm.getCapacityTeu().replaceAll("[^0-9]", "").length() == 0) {
@@ -241,6 +242,7 @@ public class F9E_RestClient {
             if (z == vesselList.size()) {
                 z = 0;
             }
+            setProgress(z);
         }
     }
 
@@ -899,6 +901,13 @@ public class F9E_RestClient {
 
 
         });
+    }
+
+    @RequestMapping(value = "progress", method = RequestMethod.GET)
+    public ResponseEntity<Integer> getVesselProgress() {
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("MyResponseHeader", "MyValue");
+        return new ResponseEntity<Integer>(getProgress(), responseHeaders, HttpStatus.CREATED);
     }
 
 }
