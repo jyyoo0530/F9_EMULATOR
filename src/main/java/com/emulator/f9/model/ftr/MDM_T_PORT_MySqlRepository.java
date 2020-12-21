@@ -10,4 +10,5 @@ public interface MDM_T_PORT_MySqlRepository extends CrudRepository<MDM_T_PORT, I
     List<MDM_T_PORT> findByLocationStatus (String locationStatus);
     MDM_T_PORT findByMdmOwnerCodeAndLocationCode (String mdmOwnerCode, String locationCode);
     MDM_T_PORT findByMdmOwnerCodeAndCountryCodeAndLocationName (String mdmOwnerCode, String countryCode, String locationName);
+    List<MDM_T_PORT> findByF9LocationId(String f9LocationId);
 }

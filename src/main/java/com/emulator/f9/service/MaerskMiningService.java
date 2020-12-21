@@ -185,7 +185,7 @@ public class MaerskMiningService {
     public F9E_MSK_PORTMDM getPortMdm2(String locationName, String geoLocationId) {
         F9E_MSK_PORTMDM f9eMskPortmdm = new F9E_MSK_PORTMDM();
         System.out.println(locationName);
-        String url = maerskPortDetailUri + locationName.replace(" ", "+");
+        String url = maerskPortDetailUri2 + geoLocationId;
         if (!locationName.contains(" - ")) {
             String response = restTemplate.getForObject(url, String.class).replace("\"\"", "\"");
 
@@ -338,6 +338,56 @@ public class MaerskMiningService {
             mdmTPortMySqlRepo.save(mdmTPort);
         } catch (Exception e) {
             System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.updateF9MdmLocation()");
+        }
+    }
+
+    public int checkF9eMdmLocation3(F9E_MSK_PORTMDM f9eMskPortmdm, F9_MDM_LOCATION_ReactiveMongoRepository f9MdmLocationRepo) {
+        int process = 4;
+        String result = "fail";
+        // 1) Unlocode가 있는지?
+
+        try {
+            System.out.println(f9eMskPortmdm.getUnLocCode());
+            process = 1;
+            result = "success";
+        } catch (Exception e) {
+            System.out.println("There is no Unlocode in F9E_MSK_PORTMDM");
+        }
+
+
+        // 2) 1)이 실패면, 도시명 + 국가명이 일치하는 것이 있는지
+        if (result.equals("fail")) {
+            try {
+                System.out.println(f9MdmLocationRepo.findByMdmOwnerCodeAndCountryCodeAndLocationName("F9M", f9eMskPortmdm.getCountryCode(), f9eMskPortmdm.getCityName()).block());
+                process = 2;
+                result = "success";
+            } catch (Exception e) {
+                System.out.println("There is no matching result with locationName+CountryName");
+            }
+        }
+
+
+        // 3) 2)가 실패면, msrkrqstCode아 locationCode가 일치하는 것이 있는지
+        if (result.equals("fail")) {
+            try {
+                System.out.println(f9MdmLocationRepo.findByMdmOwnerCodeAndLocationCode("F9M", f9eMskPortmdm.getMaerskRkstCode()).block());
+                process = 3;
+            } catch (Exception e) {
+                System.out.println("There is no matching result with geoLocationId");
+            }
+        }
+
+
+        return process;
+    }
+
+    public void updateF9MdmLocation3(F9E_MSK_PORTMDM f9eMskPortmdm, F9_MDM_LOCATION_ReactiveMongoRepository f9MdmLocationRepo, int process) {
+        try {
+            F9_MDM_LOCATION f9MdmLocation = mskConverter.convertPortMdm3(f9eMskPortmdm, f9MdmLocationRepo, process);
+            f9MdmLocationRepo.save(f9MdmLocation).block();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Exception!!     :com.f9e.emulator.service.MaerskMiningService.updateF9MdmLocation3()");
         }
     }
 

@@ -199,6 +199,105 @@ public class Converter_maerskSchedule {
 
         return newLocation;
     }
+    public F9_MDM_LOCATION convertPortMdm3(
+            F9E_MSK_PORTMDM mskPortMdm,
+            F9_MDM_LOCATION_ReactiveMongoRepository f9MdmLocationRepo,
+            int process
+    ) {
+        F9_MDM_LOCATION newLocation = new F9_MDM_LOCATION();
+        switch (process) {
+            case 1:
+                F9_MDM_LOCATION f9MdmLocation = f9MdmLocationRepo.findByMdmOwnerCodeAndLocationCode("F9M", mskPortMdm.getUnLocCode()).block();
+                newLocation.setF9LocationId("MSK" + mskPortMdm.getMaerskRkstCode()); // msk
+                newLocation.setMdmOwnerCode("MSK"); // msk
+                newLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId()); // msk
+                newLocation.setRegionCode(f9MdmLocation.getRegionCode());
+                newLocation.setRegionName(f9MdmLocation.getRegionName());
+                newLocation.setSubRegionCode(f9MdmLocation.getSubRegionCode());
+                newLocation.setSubRegionName(f9MdmLocation.getSubRegionName());
+                newLocation.setCountryCode(mskPortMdm.getCountryCode()); // msk
+                newLocation.setCountryName(mskPortMdm.getCountryName());  // msk
+                newLocation.setSubCountryCode(f9MdmLocation.getSubCountryCode());
+                newLocation.setSubCountryName(f9MdmLocation.getSubCountryName());
+                newLocation.setLocationCode(mskPortMdm.getMaerskRkstCode());  // msk
+                newLocation.setLocationName(mskPortMdm.getCityName());  //msk
+                newLocation.setLocationLatitude(f9MdmLocation.getLocationLatitude());
+                newLocation.setLocationLongitude(f9MdmLocation.getLocationLongitude());
+                newLocation.setLocationFunction(f9MdmLocation.getLocationFunction());
+                newLocation.setLocationDate(f9MdmLocation.getLocationDate());
+                newLocation.setLocationStatus(f9MdmLocation.getLocationStatus());
+                newLocation.setLocationNameWithDiacritics(f9MdmLocation.getLocationNameWithDiacritics());
+                break;
+            case 2:
+                F9_MDM_LOCATION f9MdmLocation2 = f9MdmLocationRepo.findByMdmOwnerCodeAndCountryCodeAndLocationName("F9M", mskPortMdm.getCountryCode(), mskPortMdm.getCityName()).block();
+                newLocation.setF9LocationId("MSK" + mskPortMdm.getMaerskRkstCode()); // msk
+                newLocation.setMdmOwnerCode("MSK"); // msk
+                newLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId()); // msk
+                newLocation.setRegionCode(f9MdmLocation2.getRegionCode());
+                newLocation.setRegionName(f9MdmLocation2.getRegionName());
+                newLocation.setSubRegionCode(f9MdmLocation2.getSubRegionCode());
+                newLocation.setSubRegionName(f9MdmLocation2.getSubRegionName());
+                newLocation.setCountryCode(mskPortMdm.getCountryCode()); // msk
+                newLocation.setCountryName(mskPortMdm.getCountryName());  // msk
+                newLocation.setSubCountryCode(f9MdmLocation2.getSubCountryCode());
+                newLocation.setSubCountryName(f9MdmLocation2.getSubCountryName());
+                newLocation.setLocationCode(mskPortMdm.getMaerskRkstCode());  // msk
+                newLocation.setLocationName(mskPortMdm.getCityName());  //msk
+                newLocation.setLocationLatitude(f9MdmLocation2.getLocationLatitude());
+                newLocation.setLocationLongitude(f9MdmLocation2.getLocationLongitude());
+                newLocation.setLocationFunction(f9MdmLocation2.getLocationFunction());
+                newLocation.setLocationDate(f9MdmLocation2.getLocationDate());
+                newLocation.setLocationStatus(f9MdmLocation2.getLocationStatus());
+                newLocation.setLocationNameWithDiacritics(f9MdmLocation2.getLocationNameWithDiacritics());
+                break;
+            case 3:
+                F9_MDM_LOCATION f9MdmLocation3 = f9MdmLocationRepo.findByMdmOwnerCodeAndLocationCode("F9M", mskPortMdm.getMaerskGeoLocationId()).block();
+                newLocation.setF9LocationId("MSK" + mskPortMdm.getMaerskRkstCode()); // msk
+                newLocation.setMdmOwnerCode("MSK"); // msk
+                newLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId()); // msk
+                newLocation.setRegionCode(f9MdmLocation3.getRegionCode());
+                newLocation.setRegionName(f9MdmLocation3.getRegionName());
+                newLocation.setSubRegionCode(f9MdmLocation3.getSubRegionCode());
+                newLocation.setSubRegionName(f9MdmLocation3.getSubRegionName());
+                newLocation.setCountryCode(mskPortMdm.getCountryCode()); // msk
+                newLocation.setCountryName(mskPortMdm.getCountryName());  // msk
+                newLocation.setSubCountryCode(f9MdmLocation3.getSubCountryCode());
+                newLocation.setSubCountryName(f9MdmLocation3.getSubCountryName());
+                newLocation.setLocationCode(mskPortMdm.getMaerskRkstCode());  // msk
+                newLocation.setLocationName(mskPortMdm.getCityName());  //msk
+                newLocation.setLocationLatitude(f9MdmLocation3.getLocationLatitude());
+                newLocation.setLocationLongitude(f9MdmLocation3.getLocationLongitude());
+                newLocation.setLocationFunction(f9MdmLocation3.getLocationFunction());
+                newLocation.setLocationDate(f9MdmLocation3.getLocationDate());
+                newLocation.setLocationStatus(f9MdmLocation3.getLocationStatus());
+                newLocation.setLocationNameWithDiacritics(f9MdmLocation3.getLocationNameWithDiacritics());
+                break;
+            case 4:
+                newLocation.setF9LocationId("MSK" + mskPortMdm.getMaerskRkstCode()); // msk
+                newLocation.setMdmOwnerCode("MSK"); // msk
+                newLocation.setMdmOwnerLocationId(mskPortMdm.getMaerskGeoLocationId()); // msk
+                newLocation.setRegionCode("UNDEFINED");
+                newLocation.setRegionName("UNDEFINED");
+                newLocation.setSubRegionCode("UNDEFINED");
+                newLocation.setSubRegionName("UNDEFINED");
+                newLocation.setCountryCode(mskPortMdm.getCountryCode()); // msk
+                newLocation.setCountryName(mskPortMdm.getCountryName());  // msk
+                newLocation.setSubCountryCode("UNDEFINED");
+                newLocation.setSubCountryName("UNDEFINED");
+                newLocation.setLocationCode(mskPortMdm.getMaerskRkstCode());  // msk
+                newLocation.setLocationName(mskPortMdm.getCityName());  //msk
+                newLocation.setLocationLatitude("UNDEFINED");
+                newLocation.setLocationLongitude("UNDEFINED");
+                newLocation.setLocationFunction("UNDEFINED");
+                newLocation.setLocationDate("UNDEFINED");
+                newLocation.setLocationStatus("UNDEFINED");
+                newLocation.setLocationNameWithDiacritics("UNDEFINED");
+                break;
+        }
+
+        return newLocation;
+    }
+
 
     public List<F9_SEA_SKD> convertMskSked(
             List<F9E_MSK_SKED_VSL> f9eMskSkedVsls,

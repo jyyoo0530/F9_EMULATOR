@@ -325,8 +325,28 @@ public class F9E_RestClient {
 
             // 3-1) direction forEach
             finalVoyageDirection.forEach(b -> {
+
+
                 // ---) filtered F9_SEA_SKD 생성
                 List<F9_SEA_SKD> voyDirFilteredF9SeaSkds = f9SeaSkds.stream().filter(t -> t.getVoyageNumber().replaceAll("[0-9]", "").equals(b)).collect(Collectors.toList());
+                // ---) region 통계 생성
+                List<String> regionList = new ArrayList<>();
+
+                voyDirFilteredF9SeaSkds.forEach(bx -> {
+                    MDM_T_PORT findMdm = mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("MSK" , bx.getFromKey());
+                    regionList.add(findMdm.getRegionCode());
+                });
+                List<String> distinctRegionList = regionList.stream().distinct().collect(Collectors.toList());
+                int count1 = Collections.frequency(distinctRegionList, distinctRegionList.get(0));
+                String acceptableRegion = distinctRegionList.get(0);
+                for (int tt = 1; tt < distinctRegionList.size(); tt++) {
+                    int count2 = Collections.frequency(distinctRegionList, distinctRegionList.get(tt));
+                    if (count1 < count2) {
+                        count1 = count2;
+                        acceptableRegion = distinctRegionList.get(tt);
+                    }
+                }
+
                 // ---) 다음 filter target 생성(vesselCode)
                 List<String> vesselCodes = new ArrayList<>();
                 voyDirFilteredF9SeaSkds.forEach(b1 -> vesselCodes.add(b1.getVesselKey()));
@@ -340,9 +360,13 @@ public class F9E_RestClient {
                 // ---) generate RouteGroup
                 List<String> polCodes = new ArrayList<>();
                 List<String> podCodes = new ArrayList<>();
+                String finalAcceptableRegion = acceptableRegion;
                 voyDirFilteredF9SeaSkds.forEach(b2 -> {
-                    polCodes.add(b2.getFromKey());
-                    podCodes.add(b2.getToKey());
+                    MDM_T_PORT portMdm = mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("MSK",b2.getFromKey());
+                    if(portMdm.getRegionCode().equals(finalAcceptableRegion)){
+                        polCodes.add(b2.getFromKey());
+                        podCodes.add(b2.getToKey());
+                    }
                 });
                 List<String> finalPolCodes = polCodes.stream().distinct().collect(Collectors.toList());
                 List<String> finalPodCodes = podCodes.stream().distinct().collect(Collectors.toList());
@@ -377,7 +401,7 @@ public class F9E_RestClient {
                 // 3-2) vesselCode forEach
                 finalVesselCodes.forEach(c -> {
                     // ---) filtered F9_SEA_SKD 생성
-                    List<F9_SEA_SKD> vslFilteredF9SeaSkds = voyDirFilteredF9SeaSkds.stream().filter(t -> t.getVesselKey().equals(c)).collect(Collectors.toList());
+                    List<F9_SEA_SKD> vslFilteredF9SeaSkds = voyDirFilteredF9SeaSkds.stream().filter(t -> t.getVesselKey().equals(c) && polCodes.contains(t.getFromKey())).collect(Collectors.toList());
                     // ---) 다음 filter target 생성(voyageNumber)
                     List<String> voyageNumbers = new ArrayList<>();
                     vslFilteredF9SeaSkds.forEach(c1 -> voyageNumbers.add(c1.getVoyageNumber()));
@@ -424,6 +448,7 @@ public class F9E_RestClient {
                 scheduleMaster.setWeeklySupplyTeu((int) intSummaryStatistics2.getAverage());
                 scheduleMasters.add(scheduleMaster);
                 System.out.println(scheduleMasters.size() + "    are updated");
+                scheduleMasterRepo.save(scheduleMaster).block();
             });
         }
 
@@ -431,7 +456,7 @@ public class F9E_RestClient {
         // --> 현재로써는: 1. 웹 ui구현해서 디비수정, 2) 디비 직접 수정.
 
         // 6) SVC + SVC Weeks + SVC Routes
-        scheduleMasterRepo.saveAll(scheduleMasters).blockLast();
+//        scheduleMasterRepo.saveAll(scheduleMasters).blockLast();
         System.out.println("/////////////////" + scheduleMasters.size() + " are updated" + "///////////////////");
     }
 
@@ -790,22 +815,35 @@ public class F9E_RestClient {
         }
     }
 
-    @RequestMapping(value = "mdm/createMskMdm", method = RequestMethod.GET)
-    public void createMskMdm() {
+    @RequestMapping(value = "mdm/createMskMdm/{target}", method = RequestMethod.GET)
+    public void createMskMdm(@PathVariable("target") String target) {
         MaerskMiningService miningService = new MaerskMiningService();
         // 1) Active Port List를 모두 가져온다.
         List<F9E_MSK_ACTIVEPORT> f9EMskActiveports = miningService.getActivePorts();
-        f9EMskActiveports.forEach(a -> {
-            // 2) port-detail 정보 가져온다. (list or not list)
-            F9E_MSK_PORTMDM f9EMskPortmdm = miningService.getPortMdm2(a.getLocationName(), a.getGeoId());
-            if (mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("MSK", f9EMskPortmdm.getMaerskRkstCode()) == null) {
-                // 3) check
-                int process = miningService.checkF9eMdmLocation2(f9EMskPortmdm, mdmTPortMySqlRepo);
-                // 4) update
-                miningService.updateF9MdmLocation2(f9EMskPortmdm, mdmTPortMySqlRepo, process);
-            }
-        });
-
+        switch(target){
+            case "ftr":
+                f9EMskActiveports.forEach(a -> {
+                    // 2) port-detail 정보 가져온다. (list or not list)
+                    F9E_MSK_PORTMDM f9EMskPortmdm = miningService.getPortMdm2(a.getLocationName(), a.getGeoId());
+                    if (mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("MSK", f9EMskPortmdm.getMaerskRkstCode()) == null) {
+                        // 3) check
+                        int process = miningService.checkF9eMdmLocation2(f9EMskPortmdm, mdmTPortMySqlRepo);
+                        // 4) update
+                        miningService.updateF9MdmLocation2(f9EMskPortmdm, mdmTPortMySqlRepo, process);
+                    }
+                });
+            case"f9s":
+                f9EMskActiveports.forEach(a -> {
+                    // 2) port-detail 정보 가져온다. (list or not list)
+                    F9E_MSK_PORTMDM f9EMskPortmdm = miningService.getPortMdm2(a.getLocationName(), a.getGeoId());
+                    if (f9MdmLocationRepo.findByMdmOwnerCodeAndLocationCode("MSK", f9EMskPortmdm.getMaerskRkstCode()).block() == null){
+                        // 3) check
+                        int process = miningService.checkF9eMdmLocation3(f9EMskPortmdm, f9MdmLocationRepo);
+                        // 4) update
+                        miningService.updateF9MdmLocation3(f9EMskPortmdm, f9MdmLocationRepo, process);
+                    }
+                });
+        }
 
     }
 
@@ -841,6 +879,10 @@ public class F9E_RestClient {
 
                 }
         );
+    }
+    @RequestMapping(value = "deleteMany", method = RequestMethod.GET)
+    public void deleteMany(){
+        f9MdmLocationRepo.deleteAllByMdmOwnerCodeAndRegionCode("MSK", "UNDEFINED").blockLast();
     }
 
     @RequestMapping(value = "createSchGrpRgn", method = RequestMethod.GET)
@@ -904,7 +946,7 @@ public class F9E_RestClient {
     }
 
     @RequestMapping(value = "process", method = RequestMethod.GET)
-    public ResponseEntity<Integer> getScheduleProcess(){
+    public ResponseEntity<Integer> getScheduleProcess() {
         HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("MyResponseHeader", "MyValue");
         return new ResponseEntity<Integer>(getProcess(), responseHeaders, HttpStatus.CREATED);
