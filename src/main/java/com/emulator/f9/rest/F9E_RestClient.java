@@ -330,20 +330,37 @@ public class F9E_RestClient {
                 // ---) filtered F9_SEA_SKD 생성
                 List<F9_SEA_SKD> voyDirFilteredF9SeaSkds = f9SeaSkds.stream().filter(t -> t.getVoyageNumber().replaceAll("[0-9]", "").equals(b)).collect(Collectors.toList());
                 // ---) region 통계 생성
-                List<String> regionList = new ArrayList<>();
-
+                List<String> regionFromList = new ArrayList<>();
                 voyDirFilteredF9SeaSkds.forEach(bx -> {
                     MDM_T_PORT findMdm = mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("MSK" , bx.getFromKey());
-                    regionList.add(findMdm.getRegionCode());
+                    regionFromList.add(findMdm.getRegionCode());
                 });
-                List<String> distinctRegionList = regionList.stream().distinct().collect(Collectors.toList());
-                int count1 = Collections.frequency(distinctRegionList, distinctRegionList.get(0));
-                String acceptableRegion = distinctRegionList.get(0);
-                for (int tt = 1; tt < distinctRegionList.size(); tt++) {
-                    int count2 = Collections.frequency(distinctRegionList, distinctRegionList.get(tt));
+                List<String> regionToList = new ArrayList<>();
+                voyDirFilteredF9SeaSkds.forEach(by->{
+                    MDM_T_PORT findMdm = mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("MSK" , by.getToKey());
+                    regionToList.add(findMdm.getRegionCode());
+                });
+
+                List<String> distinctFromRegionList = regionFromList.stream().distinct().collect(Collectors.toList());
+                List<String> distinctToRegionList = regionToList.stream().distinct().collect(Collectors.toList());
+
+                int count1 = Collections.frequency(distinctFromRegionList, distinctFromRegionList.get(0));
+                String acceptableFromRegion = distinctFromRegionList.get(0);
+                for (int tt = 1; tt < distinctFromRegionList.size(); tt++) {
+                    int count2 = Collections.frequency(distinctFromRegionList, distinctFromRegionList.get(tt));
                     if (count1 < count2) {
                         count1 = count2;
-                        acceptableRegion = distinctRegionList.get(tt);
+                        acceptableFromRegion = distinctFromRegionList.get(tt);
+                    }
+                }
+
+                int count3 = Collections.frequency(distinctToRegionList, distinctToRegionList.get(0));
+                String acceptableToRegion = distinctToRegionList.get(0);
+                for (int tt = 1; tt < distinctToRegionList.size(); tt++) {
+                    int count4 = Collections.frequency(distinctToRegionList, distinctToRegionList.get(tt));
+                    if (count3 < count4) {
+                        count3 = count4;
+                        acceptableToRegion = distinctToRegionList.get(tt);
                     }
                 }
 
@@ -360,10 +377,12 @@ public class F9E_RestClient {
                 // ---) generate RouteGroup
                 List<String> polCodes = new ArrayList<>();
                 List<String> podCodes = new ArrayList<>();
-                String finalAcceptableRegion = acceptableRegion;
+                String finalAcceptableFromRegion = acceptableFromRegion;
+                String finalAcceptableToRegion = acceptableToRegion;
                 voyDirFilteredF9SeaSkds.forEach(b2 -> {
-                    MDM_T_PORT portMdm = mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("MSK",b2.getFromKey());
-                    if(portMdm.getRegionCode().equals(finalAcceptableRegion)){
+                    MDM_T_PORT portMdmFrom = mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("MSK",b2.getFromKey());
+                    MDM_T_PORT portMdmTo = mdmTPortMySqlRepo.findByMdmOwnerCodeAndLocationCode("MSK", b2.getToKey());
+                    if(portMdmFrom.getRegionCode().equals(finalAcceptableFromRegion) && portMdmTo.getRegionCode().equals(finalAcceptableToRegion)){
                         polCodes.add(b2.getFromKey());
                         podCodes.add(b2.getToKey());
                     }
